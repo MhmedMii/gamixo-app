@@ -346,11 +346,16 @@ h1 {
 
 .top-bar {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "mode mode"
-    "level language";
+    "mode"
+    "level"
+    "language";
   gap: 16px;
+}
+
+.top-bar > * {
+  min-width: 0;
 }
 
 .mode-switcher,
@@ -415,7 +420,7 @@ h1 {
 
 .chip-group {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(96px, 1fr));
   gap: 12px;
 }
 
@@ -425,6 +430,8 @@ h1 {
   font-weight: 700;
   font-size: 1rem;
   padding: 0 14px;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .option-card:hover,
@@ -666,10 +673,6 @@ html[dir="rtl"] .controls {
 
   .top-bar {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "mode"
-      "level"
-      "language";
   }
 
   .option-grid,
