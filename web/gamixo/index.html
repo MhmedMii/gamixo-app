@@ -70,14 +70,23 @@
             <div class="top-bar">
               <div class="mode-switcher">
                 <label id="modeLabel" class="language-label" for="modeSelect">Mode</label>
-                <select id="modeSelect" class="language-select">
+                <div class="option-grid" role="group" aria-labelledby="modeLabel">
+                  <button id="modeHumanButton" class="option-card" type="button" data-mode="human">2 Players</button>
+                  <button id="modeBotButton" class="option-card" type="button" data-mode="bot">Play With Bot</button>
+                </div>
+                <select id="modeSelect" class="language-select visually-hidden">
                   <option value="human">2 Players</option>
                   <option value="bot">Play With Bot</option>
                 </select>
               </div>
               <div class="level-switcher">
                 <label id="botLevelLabel" class="language-label" for="botLevelSelect">Bot Level</label>
-                <select id="botLevelSelect" class="language-select">
+                <div class="chip-group" role="group" aria-labelledby="botLevelLabel">
+                  <button id="levelEasyButton" class="chip-button" type="button" data-level="easy">Easy</button>
+                  <button id="levelMediumButton" class="chip-button" type="button" data-level="medium">Medium</button>
+                  <button id="levelHardButton" class="chip-button" type="button" data-level="hard">Hard</button>
+                </div>
+                <select id="botLevelSelect" class="language-select visually-hidden">
                   <option value="easy">Easy</option>
                   <option value="medium">Medium</option>
                   <option value="hard">Hard</option>

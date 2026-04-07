@@ -325,7 +325,7 @@ const text = {
     botLevelHard: "Hard",
     languageLabel: "Language",
     setupTitle: "Game Setup",
-    setupHint: "Choose a mode, adjust the bot if needed, and then start playing.",
+    setupHint: "Tap a play mode first, then adjust the bot if needed and start playing.",
     guideTitle: "How To Play",
     guideText: "In bot mode you can tap any empty tile to move instantly. In 2 player mode, pick a tile, choose a subject, then answer the question to claim the spot.",
     subtitle: "Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.",
@@ -392,7 +392,7 @@ const text = {
     botLevelHard: "صعب",
     languageLabel: "اللغة",
     setupTitle: "إعداد اللعبة",
-    setupHint: "اختر الوضع، وعدّل مستوى البوت إذا أردت، ثم ابدأ اللعب مباشرة.",
+    setupHint: "اضغط أولاً على وضع اللعب، ثم عدّل مستوى البوت إذا أردت وابدأ اللعب مباشرة.",
     guideTitle: "طريقة اللعب",
     guideText: "في وضع البوت يمكنك الضغط على أي خانة فارغة لتلعب فوراً. في وضع اللاعبين اختر خانة، ثم موضوعاً، ثم أجب عن السؤال للفوز بالخانة.",
     subtitle: "لعبة إكس أو مطورة للمتصفح. اختر خانة، خذ دورك، وحاول تكوين ثلاثة رموز متتالية قبل اللاعب الآخر.",
@@ -560,6 +560,11 @@ function setupGame() {
   const modeSelect = document.getElementById("modeSelect");
   const botLevelSelect = document.getElementById("botLevelSelect");
   const levelSwitcher = document.querySelector(".level-switcher");
+  const modeHumanButton = document.getElementById("modeHumanButton");
+  const modeBotButton = document.getElementById("modeBotButton");
+  const levelEasyButton = document.getElementById("levelEasyButton");
+  const levelMediumButton = document.getElementById("levelMediumButton");
+  const levelHardButton = document.getElementById("levelHardButton");
   const languageSelect = document.getElementById("languageSelect");
   const setupTitle = document.getElementById("setupTitle");
   const setupHint = document.getElementById("setupHint");
@@ -687,18 +692,41 @@ function setupGame() {
   function updateStaticTexts() {
     const strings = lang();
     const pills = isBotMode() ? strings.pillsBot : strings.pills;
+    const modeButtons = [
+      [modeHumanButton, gameMode === "human"],
+      [modeBotButton, gameMode === "bot"]
+    ];
+    const levelButtons = [
+      [levelEasyButton, botLevel === "easy"],
+      [levelMediumButton, botLevel === "medium"],
+      [levelHardButton, botLevel === "hard"]
+    ];
 
     modeLabel.textContent = strings.modeLabel;
     modeSelect.value = gameMode;
     modeSelect.options[0].textContent = strings.modeHuman;
     modeSelect.options[1].textContent = strings.modeBot;
+    modeHumanButton.textContent = strings.modeHuman;
+    modeBotButton.textContent = strings.modeBot;
     botLevelLabel.textContent = strings.botLevelLabel;
     botLevelSelect.value = botLevel;
     botLevelSelect.options[0].textContent = strings.botLevelEasy;
     botLevelSelect.options[1].textContent = strings.botLevelMedium;
     botLevelSelect.options[2].textContent = strings.botLevelHard;
+    levelEasyButton.textContent = strings.botLevelEasy;
+    levelMediumButton.textContent = strings.botLevelMedium;
+    levelHardButton.textContent = strings.botLevelHard;
     botLevelSelect.disabled = !isBotMode();
     levelSwitcher.hidden = !isBotMode();
+    modeButtons.forEach(([button, isActive]) => {
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+    levelButtons.forEach(([button, isActive]) => {
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+      button.disabled = !isBotMode();
+    });
     languageLabel.textContent = strings.languageLabel;
     setupTitle.textContent = strings.setupTitle;
     setupHint.textContent = strings.setupHint;
@@ -1326,8 +1354,39 @@ function setupGame() {
     resetGame();
   });
 
+  modeHumanButton.addEventListener("click", () => {
+    if (gameMode === "human") {
+      return;
+    }
+    gameMode = "human";
+    resetGame();
+  });
+
+  modeBotButton.addEventListener("click", () => {
+    if (gameMode === "bot") {
+      return;
+    }
+    gameMode = "bot";
+    resetGame();
+  });
+
   botLevelSelect.addEventListener("change", (event) => {
     botLevel = ["easy", "medium", "hard"].includes(event.target.value) ? event.target.value : "medium";
+    render();
+  });
+
+  levelEasyButton.addEventListener("click", () => {
+    botLevel = "easy";
+    render();
+  });
+
+  levelMediumButton.addEventListener("click", () => {
+    botLevel = "medium";
+    render();
+  });
+
+  levelHardButton.addEventListener("click", () => {
+    botLevel = "hard";
     render();
   });
 
