@@ -11,89 +11,114 @@
     <div class="orb orb-one" aria-hidden="true"></div>
     <div class="orb orb-two" aria-hidden="true"></div>
     <div class="orb orb-three" aria-hidden="true"></div>
+
     <section class="hero-card">
-      <div class="top-bar">
-        <div class="mode-switcher">
-          <label id="modeLabel" class="language-label" for="modeSelect">Mode</label>
-          <select id="modeSelect" class="language-select">
-            <option value="human">2 Players</option>
-            <option value="bot">Play With Bot</option>
-          </select>
-        </div>
-        <div class="level-switcher">
-          <label id="botLevelLabel" class="language-label" for="botLevelSelect">Bot Level</label>
-          <select id="botLevelSelect" class="language-select">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-        </div>
-        <div class="language-switcher">
-          <label id="languageLabel" class="language-label" for="languageSelect">Language</label>
-          <select id="languageSelect" class="language-select">
-            <option value="en">English</option>
-            <option value="ar">العربية</option>
-          </select>
-        </div>
-      </div>
-      <p class="eyebrow">Gamixo</p>
-      <h1>Gamixo</h1>
-      <p id="subtitleText" class="subtitle">
-        Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.
-      </p>
-      <div id="highlightsStrip" class="fun-strip" aria-label="Game highlights">
-        <span id="pillArcade" class="fun-pill">Arcade Style</span>
-        <span id="pillPlayers" class="fun-pill">2 Players</span>
-        <span id="pillRounds" class="fun-pill">Fast Rounds</span>
-      </div>
-
-      <div class="status-panel">
-        <div class="turn-indicator">
-          <span id="turnLabel" class="turn-label">Current Turn</span>
-          <strong id="turnBadge" class="turn-badge">Player X</strong>
-        </div>
-        <p id="statusMessage" class="status-message">Player X's turn</p>
-      </div>
-
-      <section id="quizPanel" class="quiz-panel" aria-live="polite">
-        <div class="quiz-copy">
-          <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
-          <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
-          <p id="questionMeta" class="quiz-meta">
-            Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
+      <header class="hero-header">
+        <div class="brand-panel">
+          <p class="eyebrow">Gamixo</p>
+          <h1>Gamixo</h1>
+          <p id="subtitleText" class="subtitle">
+            Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.
           </p>
+          <div id="highlightsStrip" class="fun-strip" aria-label="Game highlights">
+            <span id="pillArcade" class="fun-pill">Arcade Style</span>
+            <span id="pillPlayers" class="fun-pill">2 Players</span>
+            <span id="pillRounds" class="fun-pill">Fast Rounds</span>
+          </div>
         </div>
-        <div class="subject-controls">
-          <label class="subject-picker" for="subjectSelect">
-            <span id="subjectLabel" class="subject-label">Subject</span>
-            <select id="subjectSelect" class="subject-select"></select>
-          </label>
-          <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
-        </div>
-        <div id="choiceList" class="choice-list" role="list"></div>
-        <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
-      </section>
 
-      <div class="board-frame">
-        <div class="board-caption">
-          <span id="boardCaptionLead">Pick a tile and start the showdown.</span>
-          <span id="boardCaptionAccent" class="caption-accent">First line of three wins.</span>
+        <div class="status-panel">
+          <div class="turn-indicator">
+            <span id="turnLabel" class="turn-label">Current Turn</span>
+            <strong id="turnBadge" class="turn-badge">Player X</strong>
+          </div>
+          <p id="statusMessage" class="status-message">Player X's turn</p>
         </div>
-        <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
-        <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
-        <button class="cell" type="button" data-index="1" aria-label="Row 1 Column 2"></button>
-        <button class="cell" type="button" data-index="2" aria-label="Row 1 Column 3"></button>
-        <button class="cell" type="button" data-index="3" aria-label="Row 2 Column 1"></button>
-        <button class="cell" type="button" data-index="4" aria-label="Row 2 Column 2"></button>
-        <button class="cell" type="button" data-index="5" aria-label="Row 2 Column 3"></button>
-        <button class="cell" type="button" data-index="6" aria-label="Row 3 Column 1"></button>
-        <button class="cell" type="button" data-index="7" aria-label="Row 3 Column 2"></button>
-        <button class="cell" type="button" data-index="8" aria-label="Row 3 Column 3"></button>
-        </div>
-      </div>
+      </header>
 
-      <div class="controls">
-        <button id="resetButton" class="reset-button" type="button">Play Again</button>
+      <div class="play-layout">
+        <section class="board-stage">
+          <div class="board-frame">
+            <div class="board-caption">
+              <span id="boardCaptionLead">Pick a tile and start the showdown.</span>
+              <span id="boardCaptionAccent" class="caption-accent">First line of three wins.</span>
+            </div>
+            <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
+              <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
+              <button class="cell" type="button" data-index="1" aria-label="Row 1 Column 2"></button>
+              <button class="cell" type="button" data-index="2" aria-label="Row 1 Column 3"></button>
+              <button class="cell" type="button" data-index="3" aria-label="Row 2 Column 1"></button>
+              <button class="cell" type="button" data-index="4" aria-label="Row 2 Column 2"></button>
+              <button class="cell" type="button" data-index="5" aria-label="Row 2 Column 3"></button>
+              <button class="cell" type="button" data-index="6" aria-label="Row 3 Column 1"></button>
+              <button class="cell" type="button" data-index="7" aria-label="Row 3 Column 2"></button>
+              <button class="cell" type="button" data-index="8" aria-label="Row 3 Column 3"></button>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="resetButton" class="reset-button" type="button">Play Again</button>
+          </div>
+        </section>
+
+        <aside class="side-panel">
+          <section class="settings-card">
+            <div class="settings-copy">
+              <p id="setupTitle" class="panel-kicker">Game Setup</p>
+              <p id="setupHint" class="panel-hint">Choose a mode, adjust the bot if needed, and then start playing.</p>
+            </div>
+            <div class="top-bar">
+              <div class="mode-switcher">
+                <label id="modeLabel" class="language-label" for="modeSelect">Mode</label>
+                <select id="modeSelect" class="language-select">
+                  <option value="human">2 Players</option>
+                  <option value="bot">Play With Bot</option>
+                </select>
+              </div>
+              <div class="level-switcher">
+                <label id="botLevelLabel" class="language-label" for="botLevelSelect">Bot Level</label>
+                <select id="botLevelSelect" class="language-select">
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
+              <div class="language-switcher">
+                <label id="languageLabel" class="language-label" for="languageSelect">Language</label>
+                <select id="languageSelect" class="language-select">
+                  <option value="en">English</option>
+                  <option value="ar">العربية</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card">
+            <p id="guideTitle" class="panel-kicker">How To Play</p>
+            <p id="guideText" class="guide-text">
+              In bot mode you can tap any empty tile to move instantly. In 2 player mode, pick a tile, choose a subject, then answer the question to claim the spot.
+            </p>
+          </section>
+
+          <section id="quizPanel" class="quiz-panel" aria-live="polite">
+            <div class="quiz-copy">
+              <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
+              <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
+              <p id="questionMeta" class="quiz-meta">
+                Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
+              </p>
+            </div>
+            <div class="subject-controls">
+              <label class="subject-picker" for="subjectSelect">
+                <span id="subjectLabel" class="subject-label">Subject</span>
+                <select id="subjectSelect" class="subject-select"></select>
+              </label>
+              <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
+            </div>
+            <div id="choiceList" class="choice-list" role="list"></div>
+            <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
+          </section>
+        </aside>
       </div>
     </section>
   </main>
