@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamixo</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <div class="orb orb-one" aria-hidden="true"></div>
+    <div class="orb orb-two" aria-hidden="true"></div>
+    <div class="orb orb-three" aria-hidden="true"></div>
+    <section class="hero-card">
+      <p class="eyebrow">Gamixo</p>
+      <h1>Gamixo</h1>
+      <p class="subtitle">
+        Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.
+      </p>
+      <div class="fun-strip" aria-label="Game highlights">
+        <span class="fun-pill">Arcade Style</span>
+        <span class="fun-pill">2 Players</span>
+        <span class="fun-pill">Fast Rounds</span>
+      </div>
+
+      <div class="status-panel">
+        <div class="turn-indicator">
+          <span class="turn-label">Current Turn</span>
+          <strong id="turnBadge" class="turn-badge">Player X</strong>
+        </div>
+        <p id="statusMessage" class="status-message">Player X's turn</p>
+      </div>
+
+      <section id="quizPanel" class="quiz-panel" aria-live="polite">
+        <div class="quiz-copy">
+          <p class="quiz-kicker">Question Challenge</p>
+          <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
+          <p id="questionMeta" class="quiz-meta">
+            Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
+          </p>
+        </div>
+        <div class="subject-controls">
+          <label class="subject-picker" for="subjectSelect">
+            <span class="subject-label">Subject</span>
+            <select id="subjectSelect" class="subject-select"></select>
+          </label>
+          <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
+        </div>
+        <div id="choiceList" class="choice-list" role="list"></div>
+        <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
+      </section>
+
+      <div class="board-frame">
+        <div class="board-caption">
+          <span>Pick a tile and start the showdown.</span>
+          <span class="caption-accent">First line of three wins.</span>
+        </div>
+        <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
+        <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
+        <button class="cell" type="button" data-index="1" aria-label="Row 1 Column 2"></button>
+        <button class="cell" type="button" data-index="2" aria-label="Row 1 Column 3"></button>
+        <button class="cell" type="button" data-index="3" aria-label="Row 2 Column 1"></button>
+        <button class="cell" type="button" data-index="4" aria-label="Row 2 Column 2"></button>
+        <button class="cell" type="button" data-index="5" aria-label="Row 2 Column 3"></button>
+        <button class="cell" type="button" data-index="6" aria-label="Row 3 Column 1"></button>
+        <button class="cell" type="button" data-index="7" aria-label="Row 3 Column 2"></button>
+        <button class="cell" type="button" data-index="8" aria-label="Row 3 Column 3"></button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="resetButton" class="reset-button" type="button">Play Again</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>

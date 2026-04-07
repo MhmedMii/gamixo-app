@@ -1,0 +1,42 @@
+{
+  "id": "movies",
+  "name": "Movies",
+  "questions": [
+    {
+      "id": "movies-frozen",
+      "prompt": "In Frozen, what is the name of Elsa's sister?",
+      "choices": ["Anna", "Olaf", "Moana", "Rapunzel"],
+      "answer": 0
+    },
+    {
+      "id": "movies-lion-king",
+      "prompt": "What is the name of Simba's father in The Lion King?",
+      "choices": ["Scar", "Mufasa", "Timon", "Pumbaa"],
+      "answer": 1
+    },
+    {
+      "id": "movies-wizard",
+      "prompt": "Which movie features a boy wizard named Harry?",
+      "choices": ["Narnia", "Harry Potter", "Shrek", "Toy Story"],
+      "answer": 1
+    },
+    {
+      "id": "movies-pixar-toy",
+      "prompt": "What kind of toy is Buzz Lightyear?",
+      "choices": ["Cowboy doll", "Space ranger", "Train conductor", "Robot dog"],
+      "answer": 1
+    },
+    {
+      "id": "movies-blue-fish",
+      "prompt": "Which animated movie follows the journey of a clownfish looking for his son?",
+      "choices": ["Cars", "Finding Nemo", "Up", "Coco"],
+      "answer": 1
+    },
+    {
+      "id": "movies-jurassic",
+      "prompt": "Which movie franchise is famous for bringing dinosaurs back to life?",
+      "choices": ["Avatar", "Jurassic Park", "Jaws", "Star Wars"],
+      "answer": 1
+    }
+  ]
+}

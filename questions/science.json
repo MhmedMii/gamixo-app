@@ -1,0 +1,42 @@
+{
+  "id": "science",
+  "name": "Science",
+  "questions": [
+    {
+      "id": "science-red-planet",
+      "prompt": "Which planet is known as the Red Planet?",
+      "choices": ["Mars", "Venus", "Mercury", "Saturn"],
+      "answer": 0
+    },
+    {
+      "id": "science-water-freeze",
+      "prompt": "At what temperature does water freeze on the Celsius scale?",
+      "choices": ["0", "10", "32", "100"],
+      "answer": 0
+    },
+    {
+      "id": "science-largest-organ",
+      "prompt": "What is the largest organ in the human body?",
+      "choices": ["Heart", "Skin", "Liver", "Lung"],
+      "answer": 1
+    },
+    {
+      "id": "science-gas-plants",
+      "prompt": "Which gas do plants absorb from the atmosphere?",
+      "choices": ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"],
+      "answer": 2
+    },
+    {
+      "id": "science-center-solar",
+      "prompt": "What is at the center of our solar system?",
+      "choices": ["The Moon", "The Sun", "Earth", "Mars"],
+      "answer": 1
+    },
+    {
+      "id": "science-spider-legs",
+      "prompt": "How many legs does a spider have?",
+      "choices": ["Six", "Eight", "Ten", "Twelve"],
+      "answer": 1
+    }
+  ]
+}

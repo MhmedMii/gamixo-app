@@ -1,0 +1,42 @@
+{
+  "id": "sports",
+  "name": "Sports",
+  "questions": [
+    {
+      "id": "sports-soccer-players",
+      "prompt": "How many players from one team are usually on the soccer field at the same time?",
+      "choices": ["9", "10", "11", "12"],
+      "answer": 2
+    },
+    {
+      "id": "sports-basketball-hoop",
+      "prompt": "How many points is a standard basketball free throw worth?",
+      "choices": ["1", "2", "3", "4"],
+      "answer": 0
+    },
+    {
+      "id": "sports-olympics",
+      "prompt": "Which event is held every four years and features many countries competing?",
+      "choices": ["Super Bowl", "Olympic Games", "Wimbledon", "Tour de France"],
+      "answer": 1
+    },
+    {
+      "id": "sports-tennis",
+      "prompt": "In tennis, what word is used for a score of zero?",
+      "choices": ["Blank", "Love", "Nil", "Ace"],
+      "answer": 1
+    },
+    {
+      "id": "sports-cricket-bat",
+      "prompt": "Which sport uses a bat, wicket, and bowler?",
+      "choices": ["Baseball", "Cricket", "Golf", "Hockey"],
+      "answer": 1
+    },
+    {
+      "id": "sports-world-cup",
+      "prompt": "Which sport awards the FIFA World Cup?",
+      "choices": ["Basketball", "Rugby", "Soccer", "Tennis"],
+      "answer": 2
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "geography",
+  "name": "Geography",
+  "questions": [
+    {
+      "id": "geography-capital-france",
+      "prompt": "What is the capital city of France?",
+      "choices": ["Rome", "Paris", "Madrid", "Berlin"],
+      "answer": 1
+    },
+    {
+      "id": "geography-largest-ocean",
+      "prompt": "What is the largest ocean on Earth?",
+      "choices": ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"],
+      "answer": 2
+    },
+    {
+      "id": "geography-largest-continent",
+      "prompt": "Which is the largest continent?",
+      "choices": ["Africa", "Europe", "Asia", "Australia"],
+      "answer": 2
+    },
+    {
+      "id": "geography-hot-desert",
+      "prompt": "What is the largest hot desert in the world?",
+      "choices": ["Gobi", "Sahara", "Arabian", "Kalahari"],
+      "answer": 1
+    },
+    {
+      "id": "geography-nile",
+      "prompt": "The Nile River flows through which continent?",
+      "choices": ["Asia", "Africa", "Europe", "South America"],
+      "answer": 1
+    },
+    {
+      "id": "geography-japan-capital",
+      "prompt": "What is the capital of Japan?",
+      "choices": ["Kyoto", "Seoul", "Tokyo", "Osaka"],
+      "answer": 2
+    }
+  ]
+}

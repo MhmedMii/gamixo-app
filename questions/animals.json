@@ -1,0 +1,42 @@
+{
+  "id": "animals",
+  "name": "Animals",
+  "questions": [
+    {
+      "id": "animals-largest",
+      "prompt": "Which animal is the largest in the world?",
+      "choices": ["Elephant", "Blue whale", "Giraffe", "Shark"],
+      "answer": 1
+    },
+    {
+      "id": "animals-camel",
+      "prompt": "How many humps does a dromedary camel have?",
+      "choices": ["One", "Two", "Three", "None"],
+      "answer": 0
+    },
+    {
+      "id": "animals-baby-frog",
+      "prompt": "What is a baby frog called?",
+      "choices": ["Cub", "Calf", "Tadpole", "Chick"],
+      "answer": 2
+    },
+    {
+      "id": "animals-fastest-land",
+      "prompt": "What is the fastest land animal?",
+      "choices": ["Lion", "Horse", "Cheetah", "Gazelle"],
+      "answer": 2
+    },
+    {
+      "id": "animals-bees",
+      "prompt": "What do bees make?",
+      "choices": ["Silk", "Milk", "Honey", "Bread"],
+      "answer": 2
+    },
+    {
+      "id": "animals-mammal",
+      "prompt": "Which of these animals is a mammal?",
+      "choices": ["Frog", "Whale", "Lizard", "Shark"],
+      "answer": 1
+    }
+  ]
+}

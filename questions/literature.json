@@ -1,0 +1,42 @@
+{
+  "id": "literature",
+  "name": "Literature",
+  "questions": [
+    {
+      "id": "literature-shakespeare",
+      "prompt": "Who wrote Romeo and Juliet?",
+      "choices": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
+      "answer": 0
+    },
+    {
+      "id": "literature-jungle-book",
+      "prompt": "What is the name of the boy in The Jungle Book?",
+      "choices": ["Mowgli", "Tarzan", "Pinocchio", "Oliver"],
+      "answer": 0
+    },
+    {
+      "id": "literature-wonderland",
+      "prompt": "Which character travels through Wonderland?",
+      "choices": ["Dorothy", "Alice", "Wendy", "Matilda"],
+      "answer": 1
+    },
+    {
+      "id": "literature-hobbit",
+      "prompt": "What type of creature is Bilbo in The Hobbit?",
+      "choices": ["Elf", "Wizard", "Hobbit", "Dwarf"],
+      "answer": 2
+    },
+    {
+      "id": "literature-lion-witch",
+      "prompt": "Which author wrote The Lion, the Witch and the Wardrobe?",
+      "choices": ["C. S. Lewis", "J. K. Rowling", "Roald Dahl", "Lewis Carroll"],
+      "answer": 0
+    },
+    {
+      "id": "literature-treasure-island",
+      "prompt": "Which famous book features pirates and a treasure map?",
+      "choices": ["Treasure Island", "Charlotte's Web", "Peter Pan", "The Secret Garden"],
+      "answer": 0
+    }
+  ]
+}

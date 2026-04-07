@@ -1,0 +1,12 @@
+{
+  "subjects": [
+    { "id": "science", "name": "Science", "file": "science.json" },
+    { "id": "history", "name": "History", "file": "history.json" },
+    { "id": "geography", "name": "Geography", "file": "geography.json" },
+    { "id": "sports", "name": "Sports", "file": "sports.json" },
+    { "id": "technology", "name": "Technology", "file": "technology.json" },
+    { "id": "movies", "name": "Movies", "file": "movies.json" },
+    { "id": "animals", "name": "Animals", "file": "animals.json" },
+    { "id": "literature", "name": "Literature", "file": "literature.json" }
+  ]
+}

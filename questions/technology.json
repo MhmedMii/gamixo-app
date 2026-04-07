@@ -1,0 +1,42 @@
+{
+  "id": "technology",
+  "name": "Technology",
+  "questions": [
+    {
+      "id": "technology-html",
+      "prompt": "What does HTML stand for?",
+      "choices": ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Main Language", "High Transfer Machine Language"],
+      "answer": 0
+    },
+    {
+      "id": "technology-browser",
+      "prompt": "Which of these is a web browser?",
+      "choices": ["Photoshop", "Chrome", "Excel", "Spotify"],
+      "answer": 1
+    },
+    {
+      "id": "technology-cpu",
+      "prompt": "What does CPU stand for?",
+      "choices": ["Central Process Unit", "Computer Personal Unit", "Central Processing Unit", "Control Program Utility"],
+      "answer": 2
+    },
+    {
+      "id": "technology-binary",
+      "prompt": "Which two digits make up binary code?",
+      "choices": ["0 and 1", "1 and 2", "2 and 3", "8 and 9"],
+      "answer": 0
+    },
+    {
+      "id": "technology-phone",
+      "prompt": "What device is mainly used to make calls, send texts, and run apps?",
+      "choices": ["Printer", "Monitor", "Smartphone", "Keyboard"],
+      "answer": 2
+    },
+    {
+      "id": "technology-usb",
+      "prompt": "Which cable type is commonly used to connect and charge many devices?",
+      "choices": ["USB", "Rope", "HDMI only", "Ethernet only"],
+      "answer": 0
+    }
+  ]
+}
