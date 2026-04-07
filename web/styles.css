@@ -359,8 +359,8 @@ h1 {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
-    "mode"
     "level"
+    "mode"
     "language";
   gap: 16px;
 }

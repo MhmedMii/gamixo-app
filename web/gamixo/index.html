@@ -68,17 +68,6 @@
               <p id="setupHint" class="panel-hint">Choose a mode, adjust the bot if needed, and then start playing.</p>
             </div>
             <div class="top-bar">
-              <div class="mode-switcher">
-                <label id="modeLabel" class="language-label" for="modeSelect">Mode</label>
-                <div class="option-grid" role="group" aria-labelledby="modeLabel">
-                  <button id="modeHumanButton" class="option-card" type="button" data-mode="human">2 Players</button>
-                  <button id="modeBotButton" class="option-card" type="button" data-mode="bot">Play With Bot</button>
-                </div>
-                <select id="modeSelect" class="language-select visually-hidden">
-                  <option value="human">2 Players</option>
-                  <option value="bot">Play With Bot</option>
-                </select>
-              </div>
               <div class="level-switcher">
                 <label id="botLevelLabel" class="language-label" for="botLevelSelect">Bot Level</label>
                 <div class="chip-group" role="group" aria-labelledby="botLevelLabel">
@@ -92,6 +81,17 @@
                   <option value="hard">Hard</option>
                 </select>
               </div>
+              <div class="mode-switcher">
+                <label id="modeLabel" class="language-label" for="modeSelect">Mode</label>
+                <div class="option-grid" role="group" aria-labelledby="modeLabel">
+                  <button id="modeHumanButton" class="option-card" type="button" data-mode="human">2 Players</button>
+                  <button id="modeBotButton" class="option-card" type="button" data-mode="bot">Play With Bot</button>
+                </div>
+                <select id="modeSelect" class="language-select visually-hidden">
+                  <option value="human">2 Players</option>
+                  <option value="bot">Play With Bot</option>
+                </select>
+              </div>
               <div class="language-switcher">
                 <label id="languageLabel" class="language-label" for="languageSelect">Language</label>
                 <select id="languageSelect" class="language-select">
@@ -100,23 +100,6 @@
                 </select>
               </div>
             </div>
-            <div class="name-grid">
-              <label class="name-field" for="playerXNameInput">
-                <span id="playerXNameLabel" class="language-label">Player X Name</span>
-                <input id="playerXNameInput" class="name-input" type="text" maxlength="18" autocomplete="off">
-              </label>
-              <label class="name-field" for="playerONameInput">
-                <span id="playerONameLabel" class="language-label">Player O Name</span>
-                <input id="playerONameInput" class="name-input" type="text" maxlength="18" autocomplete="off">
-              </label>
-            </div>
-          </section>
-
-          <section class="guide-card">
-            <p id="guideTitle" class="panel-kicker">How To Play</p>
-            <p id="guideText" class="guide-text">
-              In bot mode you can tap any empty tile to move instantly. In 2 player mode, pick a tile, choose a subject, then answer the question to claim the spot.
-            </p>
           </section>
 
           <section id="quizPanel" class="quiz-panel" aria-live="polite">
@@ -136,6 +119,13 @@
             </div>
             <div id="choiceList" class="choice-list" role="list"></div>
             <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
+          </section>
+
+          <section class="guide-card">
+            <p id="guideTitle" class="panel-kicker">How To Play</p>
+            <p id="guideText" class="guide-text">
+              In bot mode you can tap any empty tile to move instantly. In 2 player mode, pick a tile, choose a subject, then answer the question to claim the spot.
+            </p>
           </section>
         </aside>
       </div>
