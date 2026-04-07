@@ -327,7 +327,7 @@ h1 {
 
 .settings-card {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .settings-copy {
@@ -346,8 +346,11 @@ h1 {
 
 .top-bar {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "mode mode"
+    "level language";
+  gap: 16px;
 }
 
 .mode-switcher,
@@ -356,6 +359,18 @@ h1 {
 .subject-picker {
   display: grid;
   gap: 8px;
+}
+
+.mode-switcher {
+  grid-area: mode;
+}
+
+.level-switcher {
+  grid-area: level;
+}
+
+.language-switcher {
+  grid-area: language;
 }
 
 .visually-hidden {
@@ -373,7 +388,7 @@ h1 {
 .option-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .option-card,
@@ -387,23 +402,29 @@ h1 {
 }
 
 .option-card {
-  min-height: 72px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  text-align: left;
+  min-height: 82px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  text-align: center;
   font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .chip-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .chip-button {
-  min-height: 46px;
-  border-radius: 14px;
+  min-height: 54px;
+  border-radius: 16px;
   font-weight: 700;
+  font-size: 1rem;
+  padding: 0 14px;
 }
 
 .option-card:hover,
@@ -433,8 +454,8 @@ h1 {
 .language-select,
 .subject-select {
   width: 100%;
-  min-height: 50px;
-  padding: 0 14px;
+  min-height: 56px;
+  padding: 0 18px;
   border-radius: 16px;
   border: 1px solid var(--border-soft);
   background: var(--bg-soft);
@@ -645,6 +666,10 @@ html[dir="rtl"] .controls {
 
   .top-bar {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "mode"
+      "level"
+      "language";
   }
 
   .option-grid,
