@@ -316,10 +316,18 @@ const questionTranslations = {
 const text = {
   en: {
     dir: "ltr",
+    modeLabel: "Mode",
+    modeHuman: "2 Players",
+    modeBot: "Play With Bot",
+    botLevelLabel: "Bot Level",
+    botLevelEasy: "Easy",
+    botLevelMedium: "Medium",
+    botLevelHard: "Hard",
     languageLabel: "Language",
     subtitle: "Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.",
     highlightsAria: "Game highlights",
     pills: ["Arcade Style", "2 Players", "Fast Rounds"],
+    pillsBot: ["Arcade Style", "Vs Bot", "Fast Rounds"],
     turnLabel: "Current Turn",
     quizKicker: "Question Challenge",
     subjectLabel: "Subject",
@@ -338,6 +346,7 @@ const text = {
     currentTurn: (player) => `Player ${player}'s turn`,
     winner: (player) => `Player ${player} wins!`,
     draw: "It's a draw!",
+    botThinking: "Bot is planning the next move.",
     loadingStatus: (player, category) => `Loading a ${category || "subject"} question for Player ${player}.`,
     answeringStatus: (player, category) => `Player ${player} is answering a ${category} question.`,
     choosingStatus: (player) => `Player ${player} is choosing a subject for a tile.`,
@@ -370,10 +379,18 @@ const text = {
   },
   ar: {
     dir: "rtl",
+    modeLabel: "الوضع",
+    modeHuman: "لاعبان",
+    modeBot: "العب ضد البوت",
+    botLevelLabel: "مستوى البوت",
+    botLevelEasy: "سهل",
+    botLevelMedium: "متوسط",
+    botLevelHard: "صعب",
     languageLabel: "اللغة",
     subtitle: "لعبة إكس أو مطورة للمتصفح. اختر خانة، خذ دورك، وحاول تكوين ثلاثة رموز متتالية قبل اللاعب الآخر.",
     highlightsAria: "مميزات اللعبة",
     pills: ["أسلوب أركيد", "لاعبان", "جولات سريعة"],
+    pillsBot: ["أسلوب أركيد", "ضد البوت", "جولات سريعة"],
     turnLabel: "الدور الحالي",
     quizKicker: "تحدي الأسئلة",
     subjectLabel: "الموضوع",
@@ -392,6 +409,7 @@ const text = {
     currentTurn: (player) => `دور اللاعب ${player}`,
     winner: (player) => `فاز اللاعب ${player}!`,
     draw: "انتهت المباراة بالتعادل!",
+    botThinking: "البوت يخطط للحركة التالية.",
     loadingStatus: (player, category) => `جارٍ تحميل سؤال ${category || "موضوع"} للاعب ${player}.`,
     answeringStatus: (player, category) => `اللاعب ${player} يجيب عن سؤال ${category}.`,
     choosingStatus: (player) => `اللاعب ${player} يختار موضوعاً لخانة.`,
@@ -524,12 +542,16 @@ function setupGame() {
   const statusMessage = document.getElementById("statusMessage");
   const turnBadge = document.getElementById("turnBadge");
   const resetButton = document.getElementById("resetButton");
+  const quizPanel = document.getElementById("quizPanel");
   const choiceList = document.getElementById("choiceList");
   const questionPrompt = document.getElementById("questionPrompt");
   const questionMeta = document.getElementById("questionMeta");
   const questionResult = document.getElementById("questionResult");
   const subjectSelect = document.getElementById("subjectSelect");
   const loadQuestionButton = document.getElementById("loadQuestionButton");
+  const modeSelect = document.getElementById("modeSelect");
+  const botLevelSelect = document.getElementById("botLevelSelect");
+  const levelSwitcher = document.querySelector(".level-switcher");
   const languageSelect = document.getElementById("languageSelect");
   const subtitleText = document.getElementById("subtitleText");
   const highlightsStrip = document.getElementById("highlightsStrip");
@@ -541,14 +563,19 @@ function setupGame() {
   const subjectLabel = document.getElementById("subjectLabel");
   const boardCaptionLead = document.getElementById("boardCaptionLead");
   const boardCaptionAccent = document.getElementById("boardCaptionAccent");
+  const modeLabel = document.getElementById("modeLabel");
+  const botLevelLabel = document.getElementById("botLevelLabel");
   const languageLabel = document.getElementById("languageLabel");
   const cells = Array.from(boardElement.querySelectorAll(".cell"));
 
   let currentLanguage = "en";
+  let gameMode = "human";
+  let botLevel = "medium";
   let state = createGameState();
   let categoryState = createCategoryState();
   let challenge = null;
   let noteState = { key: "noteReady", params: {} };
+  let botActionTimer = null;
 
   const playerSubjects = { X: "", O: "" };
   const questionSets = new Map();
@@ -560,6 +587,21 @@ function setupGame() {
 
   function setNote(key, params = {}) {
     noteState = { key, params };
+  }
+
+  function isBotMode() {
+    return gameMode === "bot";
+  }
+
+  function isBotPlayer(player) {
+    return isBotMode() && player === "O";
+  }
+
+  function clearBotActionTimer() {
+    if (botActionTimer) {
+      window.clearTimeout(botActionTimer);
+      botActionTimer = null;
+    }
   }
 
   function localizeSubjectName(subjectId, fallbackName = "Selected Subject") {
@@ -632,13 +674,25 @@ function setupGame() {
 
   function updateStaticTexts() {
     const strings = lang();
+    const pills = isBotMode() ? strings.pillsBot : strings.pills;
 
+    modeLabel.textContent = strings.modeLabel;
+    modeSelect.value = gameMode;
+    modeSelect.options[0].textContent = strings.modeHuman;
+    modeSelect.options[1].textContent = strings.modeBot;
+    botLevelLabel.textContent = strings.botLevelLabel;
+    botLevelSelect.value = botLevel;
+    botLevelSelect.options[0].textContent = strings.botLevelEasy;
+    botLevelSelect.options[1].textContent = strings.botLevelMedium;
+    botLevelSelect.options[2].textContent = strings.botLevelHard;
+    botLevelSelect.disabled = !isBotMode();
+    levelSwitcher.hidden = !isBotMode();
     languageLabel.textContent = strings.languageLabel;
     subtitleText.textContent = strings.subtitle;
     highlightsStrip.setAttribute("aria-label", strings.highlightsAria);
-    pillArcade.textContent = strings.pills[0];
-    pillPlayers.textContent = strings.pills[1];
-    pillRounds.textContent = strings.pills[2];
+    pillArcade.textContent = pills[0];
+    pillPlayers.textContent = pills[1];
+    pillRounds.textContent = pills[2];
     turnLabel.textContent = strings.turnLabel;
     quizKicker.textContent = strings.quizKicker;
     subjectLabel.textContent = strings.subjectLabel;
@@ -675,6 +729,10 @@ function setupGame() {
 
     if (state.isDraw) {
       return strings.draw;
+    }
+
+    if (isBotPlayer(state.currentPlayer)) {
+      return strings.botThinking;
     }
 
     return strings.currentTurn(state.currentPlayer);
@@ -739,6 +797,12 @@ function setupGame() {
   }
 
   function renderChallenge() {
+    quizPanel.hidden = isBotMode();
+
+    if (isBotMode()) {
+      return;
+    }
+
     const strings = lang();
     choiceList.replaceChildren();
     renderSubjectOptions();
@@ -810,7 +874,11 @@ function setupGame() {
       const value = state.board[index];
       cell.textContent = value;
       cell.dataset.player = value;
-      cell.disabled = Boolean(value) || Boolean(state.winner) || state.isDraw || Boolean(challenge);
+      cell.disabled = Boolean(value)
+        || Boolean(state.winner)
+        || state.isDraw
+        || (!isBotMode() && Boolean(challenge))
+        || isBotPlayer(state.currentPlayer);
       cell.classList.toggle("winning", state.winningPattern.includes(index));
     });
 
@@ -818,6 +886,7 @@ function setupGame() {
     updateTurnBadge();
     updateBodyState();
     renderChallenge();
+    scheduleBotAction();
   }
 
   function getSubjectById(subjectId) {
@@ -829,6 +898,133 @@ function setupGame() {
     challenge = createChallenge(tileIndex, player, savedCategoryId);
     setNote("noteChooseSubject", { player, tileIndex });
     render();
+  }
+
+  function getOpenTileIndexes(board) {
+    return board
+      .map((value, index) => (value ? null : index))
+      .filter((value) => value !== null);
+  }
+
+  function findStrategicMove(board, player) {
+    for (const pattern of winningPatterns) {
+      const values = pattern.map((index) => board[index]);
+      const playerCount = values.filter((value) => value === player).length;
+      const emptyIndexes = pattern.filter((index) => !board[index]);
+
+      if (playerCount === 2 && emptyIndexes.length === 1) {
+        return emptyIndexes[0];
+      }
+    }
+
+    return null;
+  }
+
+  function scoreBoardForBot(boardState, depth) {
+    const result = evaluateBoard(boardState);
+
+    if (result.winner === "O") {
+      return 10 - depth;
+    }
+
+    if (result.winner === "X") {
+      return depth - 10;
+    }
+
+    return 0;
+  }
+
+  function minimax(boardState, currentPlayer, depth = 0) {
+    const result = evaluateBoard(boardState);
+    if (result.winner || result.isDraw) {
+      return {
+        score: scoreBoardForBot(boardState, depth),
+        move: null
+      };
+    }
+
+    const openTiles = getOpenTileIndexes(boardState);
+    let bestMove = null;
+
+    if (currentPlayer === "O") {
+      let bestScore = -Infinity;
+
+      openTiles.forEach((index) => {
+        const nextBoard = [...boardState];
+        nextBoard[index] = "O";
+        const outcome = minimax(nextBoard, "X", depth + 1);
+
+        if (outcome.score > bestScore) {
+          bestScore = outcome.score;
+          bestMove = index;
+        }
+      });
+
+      return { score: bestScore, move: bestMove };
+    }
+
+    let bestScore = Infinity;
+
+    openTiles.forEach((index) => {
+      const nextBoard = [...boardState];
+      nextBoard[index] = "X";
+      const outcome = minimax(nextBoard, "O", depth + 1);
+
+      if (outcome.score < bestScore) {
+        bestScore = outcome.score;
+        bestMove = index;
+      }
+    });
+
+    return { score: bestScore, move: bestMove };
+  }
+
+  function chooseBotMove(board) {
+    if (botLevel === "easy") {
+      const openTiles = getOpenTileIndexes(board);
+      return openTiles[Math.floor(Math.random() * openTiles.length)];
+    }
+
+    if (botLevel === "hard") {
+      const bestMove = minimax(board, "O").move;
+      if (bestMove !== null) {
+        return bestMove;
+      }
+    }
+
+    const winningMove = findStrategicMove(board, "O");
+    if (winningMove !== null) {
+      return winningMove;
+    }
+
+    const blockingMove = findStrategicMove(board, "X");
+    if (blockingMove !== null) {
+      return blockingMove;
+    }
+
+    if (!board[4]) {
+      return 4;
+    }
+
+    const corners = [0, 2, 6, 8].filter((index) => !board[index]);
+    if (corners.length > 0) {
+      return corners[Math.floor(Math.random() * corners.length)];
+    }
+
+    const openTiles = getOpenTileIndexes(board);
+    return openTiles[Math.floor(Math.random() * openTiles.length)];
+  }
+
+  function getBotDelay() {
+    if (botLevel === "easy") {
+      return 180;
+    }
+
+    if (botLevel === "hard") {
+      return 260;
+    }
+
+    return 220;
   }
 
   function shuffle(items) {
@@ -950,6 +1146,39 @@ function setupGame() {
     render();
   }
 
+  function startBotTurn() {
+    if (!isBotPlayer(state.currentPlayer) || challenge || state.winner || state.isDraw) {
+      return;
+    }
+
+    const tileIndex = chooseBotMove(state.board);
+    if (tileIndex === undefined) {
+      return;
+    }
+
+    state = applyMove(state, tileIndex, "O");
+    setNote("noteReady");
+    render();
+  }
+
+  function scheduleBotAction() {
+    clearBotActionTimer();
+
+    if (!isBotMode() || state.winner || state.isDraw) {
+      return;
+    }
+
+    if (challenge) {
+      return;
+    }
+
+    if (isBotPlayer(state.currentPlayer)) {
+      botActionTimer = window.setTimeout(() => {
+        startBotTurn();
+      }, getBotDelay());
+    }
+  }
+
   async function loadCategories() {
     render();
 
@@ -973,16 +1202,25 @@ function setupGame() {
     render();
   }
 
+  function getResetNoteKey() {
+    if (isBotMode()) {
+      return "noteReady";
+    }
+
+    return categoryState.loading ? "noteLoadingSubjects" : "noteTapChoose";
+  }
+
   function resetGame() {
+    clearBotActionTimer();
     state = createGameState();
     challenge = null;
-    setNote(categoryState.loading ? "noteLoadingSubjects" : "noteTapChoose");
+    setNote(getResetNoteKey());
     render();
   }
 
   boardElement.addEventListener("click", (event) => {
     const cell = event.target.closest(".cell");
-    if (!cell || challenge || state.winner || state.isDraw || categoryState.loading || categoryState.error) {
+    if (!cell || state.winner || state.isDraw || isBotPlayer(state.currentPlayer)) {
       return;
     }
 
@@ -991,11 +1229,22 @@ function setupGame() {
       return;
     }
 
+    if (isBotMode()) {
+      state = applyMove(state, index, "X");
+      setNote("noteReady");
+      render();
+      return;
+    }
+
+    if (challenge || categoryState.loading || categoryState.error) {
+      return;
+    }
+
     setChallengeForPlayer(index, state.currentPlayer);
   });
 
   subjectSelect.addEventListener("change", (event) => {
-    if (!challenge || challenge.phase !== "subject") {
+    if (!challenge || challenge.phase !== "subject" || isBotPlayer(challenge.player)) {
       return;
     }
 
@@ -1020,12 +1269,15 @@ function setupGame() {
   });
 
   loadQuestionButton.addEventListener("click", () => {
+    if (challenge && isBotPlayer(challenge.player)) {
+      return;
+    }
     loadQuestion();
   });
 
   choiceList.addEventListener("click", (event) => {
     const choiceButton = event.target.closest(".choice-button");
-    if (!choiceButton || !challenge || challenge.phase !== "question" || state.winner || state.isDraw) {
+    if (!choiceButton || !challenge || challenge.phase !== "question" || state.winner || state.isDraw || isBotPlayer(challenge.player)) {
       return;
     }
 
@@ -1050,6 +1302,16 @@ function setupGame() {
 
   languageSelect.addEventListener("change", (event) => {
     currentLanguage = event.target.value === "ar" ? "ar" : "en";
+    render();
+  });
+
+  modeSelect.addEventListener("change", (event) => {
+    gameMode = event.target.value === "bot" ? "bot" : "human";
+    resetGame();
+  });
+
+  botLevelSelect.addEventListener("change", (event) => {
+    botLevel = ["easy", "medium", "hard"].includes(event.target.value) ? event.target.value : "medium";
     render();
   });
 
