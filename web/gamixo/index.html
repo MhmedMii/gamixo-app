@@ -12,20 +12,29 @@
     <div class="orb orb-two" aria-hidden="true"></div>
     <div class="orb orb-three" aria-hidden="true"></div>
     <section class="hero-card">
+      <div class="top-bar">
+        <div class="language-switcher">
+          <label id="languageLabel" class="language-label" for="languageSelect">Language</label>
+          <select id="languageSelect" class="language-select">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+          </select>
+        </div>
+      </div>
       <p class="eyebrow">Gamixo</p>
       <h1>Gamixo</h1>
-      <p class="subtitle">
+      <p id="subtitleText" class="subtitle">
         Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.
       </p>
-      <div class="fun-strip" aria-label="Game highlights">
-        <span class="fun-pill">Arcade Style</span>
-        <span class="fun-pill">2 Players</span>
-        <span class="fun-pill">Fast Rounds</span>
+      <div id="highlightsStrip" class="fun-strip" aria-label="Game highlights">
+        <span id="pillArcade" class="fun-pill">Arcade Style</span>
+        <span id="pillPlayers" class="fun-pill">2 Players</span>
+        <span id="pillRounds" class="fun-pill">Fast Rounds</span>
       </div>
 
       <div class="status-panel">
         <div class="turn-indicator">
-          <span class="turn-label">Current Turn</span>
+          <span id="turnLabel" class="turn-label">Current Turn</span>
           <strong id="turnBadge" class="turn-badge">Player X</strong>
         </div>
         <p id="statusMessage" class="status-message">Player X's turn</p>
@@ -33,7 +42,7 @@
 
       <section id="quizPanel" class="quiz-panel" aria-live="polite">
         <div class="quiz-copy">
-          <p class="quiz-kicker">Question Challenge</p>
+          <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
           <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
           <p id="questionMeta" class="quiz-meta">
             Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
@@ -41,7 +50,7 @@
         </div>
         <div class="subject-controls">
           <label class="subject-picker" for="subjectSelect">
-            <span class="subject-label">Subject</span>
+            <span id="subjectLabel" class="subject-label">Subject</span>
             <select id="subjectSelect" class="subject-select"></select>
           </label>
           <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
@@ -52,8 +61,8 @@
 
       <div class="board-frame">
         <div class="board-caption">
-          <span>Pick a tile and start the showdown.</span>
-          <span class="caption-accent">First line of three wins.</span>
+          <span id="boardCaptionLead">Pick a tile and start the showdown.</span>
+          <span id="boardCaptionAccent" class="caption-accent">First line of three wins.</span>
         </div>
         <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
         <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
