@@ -397,11 +397,13 @@ h1 {
 }
 
 .option-card,
-.chip-button {
+.chip-button,
+.language-select,
+.subject-select {
   border: 1px solid var(--border-soft);
   background: rgba(255, 255, 255, 0.04);
   color: var(--text-main);
-  font: inherit;
+  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif;
   cursor: pointer;
   transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
 }
@@ -412,8 +414,8 @@ h1 {
   border-radius: 20px;
   text-align: center;
   font-weight: 800;
-  font-size: 1.15rem;
-  line-height: 1.2;
+  font-size: 1rem;
+  line-height: 1.25;
   white-space: normal;
   text-wrap: balance;
 }
@@ -425,13 +427,15 @@ h1 {
 }
 
 .chip-button {
-  min-height: 54px;
+  min-height: 52px;
   border-radius: 16px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.92rem;
   padding: 0 14px;
   white-space: nowrap;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .option-card:hover,
@@ -467,7 +471,8 @@ h1 {
   border: 1px solid var(--border-soft);
   background: var(--bg-soft);
   color: var(--text-main);
-  font: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
   appearance: none;
 }
 
