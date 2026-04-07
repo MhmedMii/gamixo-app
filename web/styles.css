@@ -1,12 +1,12 @@
 :root {
-  --bg-base: #08090f;
-  --bg-mid: #111524;
+  --bg-base: #020202;
+  --bg-mid: #090909;
   --panel-border: rgba(255, 255, 255, 0.14);
-  --text-main: #eef1ff;
-  --text-soft: #adb6ff;
-  --accent-pink: #8fd6ff;
-  --accent-cyan: #4bf0ff;
-  --shadow-strong: 0 28px 80px rgba(0, 0, 0, 0.45);
+  --text-main: #fff4ea;
+  --text-soft: #d3b7a0;
+  --accent-pink: #ff9a3d;
+  --accent-cyan: #ff6a00;
+  --shadow-strong: 0 28px 80px rgba(0, 0, 0, 0.62);
 }
 
 * {
@@ -19,10 +19,10 @@ body {
   font-family: "Marker Felt", "Trebuchet MS", "Avenir Next Condensed", sans-serif;
   color: var(--text-main);
   background:
-    radial-gradient(circle at 18% 12%, rgba(143, 214, 255, 0.18), transparent 18%),
-    radial-gradient(circle at 78% 15%, rgba(75, 240, 255, 0.14), transparent 16%),
-    radial-gradient(circle at 50% 110%, rgba(106, 168, 255, 0.08), transparent 20%),
-    linear-gradient(160deg, var(--bg-base), var(--bg-mid) 55%, #0b101e);
+    radial-gradient(circle at 18% 12%, rgba(255, 154, 61, 0.16), transparent 18%),
+    radial-gradient(circle at 78% 15%, rgba(255, 106, 0, 0.14), transparent 16%),
+    radial-gradient(circle at 50% 110%, rgba(255, 134, 43, 0.08), transparent 20%),
+    linear-gradient(160deg, var(--bg-base), var(--bg-mid) 55%, #050505);
   overflow-x: hidden;
 }
 
@@ -51,7 +51,7 @@ body::before {
   width: min(100%, 640px);
   padding: 34px;
   border-radius: 36px;
-  background: linear-gradient(180deg, rgba(14, 18, 33, 0.94), rgba(7, 10, 20, 0.9));
+  background: linear-gradient(180deg, rgba(8, 8, 8, 0.96), rgba(2, 2, 2, 0.92));
   border: 1px solid var(--panel-border);
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow-strong);
@@ -93,8 +93,8 @@ body::before {
 
 .language-select:focus-visible {
   outline: none;
-  border-color: rgba(75, 240, 255, 0.45);
-  box-shadow: 0 0 0 4px rgba(75, 240, 255, 0.12);
+  border-color: rgba(255, 106, 0, 0.45);
+  box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
 }
 
 .hero-card::before {
@@ -104,7 +104,7 @@ body::before {
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(75, 240, 255, 0.18), transparent 68%);
+  background: radial-gradient(circle, rgba(255, 106, 0, 0.18), transparent 68%);
   pointer-events: none;
 }
 
@@ -115,7 +115,7 @@ body::before {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(143, 214, 255, 0.12), transparent 70%);
+  background: radial-gradient(circle, rgba(255, 154, 61, 0.12), transparent 70%);
   pointer-events: none;
 }
 
@@ -133,7 +133,7 @@ body::before {
   left: 10%;
   width: 120px;
   height: 120px;
-  background: radial-gradient(circle at 30% 30%, rgba(143, 214, 255, 0.7), rgba(143, 214, 255, 0.05));
+  background: radial-gradient(circle at 30% 30%, rgba(255, 154, 61, 0.7), rgba(255, 154, 61, 0.05));
 }
 
 .orb-two {
@@ -141,7 +141,7 @@ body::before {
   bottom: 8%;
   width: 170px;
   height: 170px;
-  background: radial-gradient(circle at 30% 30%, rgba(75, 240, 255, 0.72), rgba(75, 240, 255, 0.04));
+  background: radial-gradient(circle at 30% 30%, rgba(255, 106, 0, 0.72), rgba(255, 106, 0, 0.04));
   animation-delay: -3s;
 }
 
@@ -150,7 +150,7 @@ body::before {
   top: 20%;
   width: 80px;
   height: 80px;
-  background: radial-gradient(circle at 30% 30%, rgba(118, 184, 255, 0.65), rgba(118, 184, 255, 0.06));
+  background: radial-gradient(circle at 30% 30%, rgba(255, 126, 24, 0.65), rgba(255, 126, 24, 0.06));
   animation-delay: -5s;
 }
 
@@ -167,7 +167,7 @@ h1 {
   font-size: clamp(2.5rem, 8vw, 4.7rem);
   line-height: 0.9;
   letter-spacing: 0.03em;
-  text-shadow: 0 10px 28px rgba(75, 240, 255, 0.18);
+  text-shadow: 0 10px 28px rgba(255, 106, 0, 0.18);
 }
 
 .subtitle {
@@ -189,8 +189,8 @@ h1 {
   border-radius: 999px;
   font-size: 0.88rem;
   color: #f5f9ff;
-  background: linear-gradient(135deg, rgba(143, 214, 255, 0.92), rgba(75, 240, 255, 0.88));
-  box-shadow: 0 12px 30px rgba(75, 240, 255, 0.12);
+  background: linear-gradient(135deg, rgba(255, 154, 61, 0.92), rgba(255, 106, 0, 0.88));
+  box-shadow: 0 12px 30px rgba(255, 106, 0, 0.16);
 }
 
 .status-panel {
@@ -201,7 +201,7 @@ h1 {
   margin-top: 24px;
   padding: 20px 22px;
   border-radius: 26px;
-  background: rgba(10, 14, 28, 0.72);
+  background: rgba(8, 8, 8, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
@@ -235,7 +235,7 @@ h1 {
   margin-top: 24px;
   padding: 22px;
   border-radius: 28px;
-  background: linear-gradient(180deg, rgba(12, 18, 33, 0.9), rgba(9, 13, 24, 0.94));
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(4, 4, 4, 0.96));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
@@ -299,25 +299,25 @@ h1 {
 
 .subject-select:focus-visible {
   outline: none;
-  border-color: rgba(75, 240, 255, 0.45);
-  box-shadow: 0 0 0 4px rgba(75, 240, 255, 0.12);
+  border-color: rgba(255, 106, 0, 0.45);
+  box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
 }
 
 .subject-button {
   border: 0;
   padding: 0 20px;
-  background: linear-gradient(135deg, rgba(143, 214, 255, 0.92), rgba(75, 240, 255, 0.88));
-  color: #03111c;
+  background: linear-gradient(135deg, rgba(255, 154, 61, 0.92), rgba(255, 106, 0, 0.88));
+  color: #1d0900;
   font-weight: 800;
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
-  box-shadow: 0 18px 32px rgba(75, 240, 255, 0.18);
+  box-shadow: 0 18px 32px rgba(255, 106, 0, 0.18);
 }
 
 .subject-button:hover,
 .subject-button:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 22px 36px rgba(75, 240, 255, 0.22);
+  box-shadow: 0 22px 36px rgba(255, 106, 0, 0.22);
   outline: none;
 }
 
@@ -354,9 +354,9 @@ h1 {
 .choice-button:hover,
 .choice-button:focus-visible {
   transform: translateY(-2px);
-  border-color: rgba(75, 240, 255, 0.45);
-  background: rgba(75, 240, 255, 0.1);
-  box-shadow: 0 14px 28px rgba(75, 240, 255, 0.12);
+  border-color: rgba(255, 106, 0, 0.45);
+  background: rgba(255, 106, 0, 0.1);
+  box-shadow: 0 14px 28px rgba(255, 106, 0, 0.12);
   outline: none;
 }
 
@@ -394,7 +394,7 @@ html[dir="rtl"] .controls {
   margin-top: 24px;
   padding: 20px;
   border-radius: 32px;
-  background: linear-gradient(180deg, rgba(16, 22, 38, 0.92), rgba(12, 16, 30, 0.96));
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.94), rgba(4, 4, 4, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
@@ -422,7 +422,7 @@ html[dir="rtl"] .controls {
 
 .cell {
   aspect-ratio: 1;
-  border: 1px solid rgba(70, 84, 165, 0.24);
+  border: 1px solid rgba(255, 136, 26, 0.24);
   border-radius: 28px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.08));
   backdrop-filter: blur(18px);
@@ -449,8 +449,8 @@ html[dir="rtl"] .controls {
 .cell:focus-visible:not(:disabled) {
   transform: translateY(-4px) scale(1.02);
   rotate: -2deg;
-  border-color: rgba(75, 240, 255, 0.55);
-  box-shadow: 0 20px 32px rgba(75, 240, 255, 0.18);
+  border-color: rgba(255, 106, 0, 0.55);
+  box-shadow: 0 20px 32px rgba(255, 106, 0, 0.18);
   outline: none;
 }
 
@@ -460,12 +460,12 @@ html[dir="rtl"] .controls {
 
 .cell[data-player="X"] {
   color: var(--accent-pink);
-  text-shadow: 0 10px 22px rgba(143, 214, 255, 0.28);
+  text-shadow: 0 10px 22px rgba(255, 154, 61, 0.28);
 }
 
 .cell[data-player="O"] {
   color: var(--accent-cyan);
-  text-shadow: 0 10px 22px rgba(75, 240, 255, 0.28);
+  text-shadow: 0 10px 22px rgba(255, 106, 0, 0.28);
 }
 
 .cell.winning {
@@ -487,19 +487,19 @@ html[dir="rtl"] .controls {
   border-radius: 999px;
   padding: 15px 24px;
   background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
-  color: #fff;
+  color: #170700;
   font: inherit;
   font-weight: 700;
   letter-spacing: 0.03em;
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
-  box-shadow: 0 18px 32px rgba(143, 214, 255, 0.24);
+  box-shadow: 0 18px 32px rgba(255, 154, 61, 0.24);
 }
 
 .reset-button:hover,
 .reset-button:focus-visible {
   transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 22px 36px rgba(75, 240, 255, 0.22);
+  box-shadow: 0 22px 36px rgba(255, 106, 0, 0.22);
   outline: none;
 }
 
@@ -516,7 +516,7 @@ body[data-outcome="win"] .status-panel {
 }
 
 body[data-outcome="draw"] .status-panel {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(75, 240, 255, 0.12));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 106, 0, 0.12));
 }
 
 @keyframes rise-in {
