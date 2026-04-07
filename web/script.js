@@ -9,6 +9,24 @@ const winningPatterns = [
   [2, 4, 6]
 ];
 
+function formatEnglishCompetitor(player) {
+  if (typeof player !== "string") {
+    return String(player || "");
+  }
+
+  const normalizedPlayer = player.trim();
+  return normalizedPlayer.length === 1 ? `Player ${normalizedPlayer}` : normalizedPlayer;
+}
+
+function formatArabicCompetitor(player) {
+  if (typeof player !== "string") {
+    return String(player || "");
+  }
+
+  const normalizedPlayer = player.trim();
+  return normalizedPlayer.length === 1 ? `اللاعب ${normalizedPlayer}` : normalizedPlayer;
+}
+
 const QUESTIONS_FOLDER_PATH = "../../questions/";
 
 const subjectTranslations = {
@@ -324,6 +342,11 @@ const text = {
     botLevelMedium: "Medium",
     botLevelHard: "Hard",
     languageLabel: "Language",
+    playerXNameLabel: "Player X Name",
+    playerONameLabel: "Player O Name",
+    botNameLabel: "Bot Name",
+    namePlaceholder: "Enter a name",
+    botName: "Bot",
     setupTitle: "Game Setup",
     setupHint: "Tap a play mode first, then adjust the bot if needed and start playing.",
     guideTitle: "How To Play",
@@ -346,14 +369,14 @@ const text = {
     loadingBadge: (player) => `Loading: ${player}`,
     questionBadge: (player) => `Question: ${player}`,
     subjectBadge: (player) => `Subject: ${player}`,
-    player: (player) => `Player ${player}`,
-    currentTurn: (player) => `Player ${player}'s turn`,
-    winner: (player) => `Player ${player} wins!`,
+    player: (player) => formatEnglishCompetitor(player),
+    currentTurn: (player) => `${formatEnglishCompetitor(player)}'s turn`,
+    winner: (player) => `${formatEnglishCompetitor(player)} wins!`,
     draw: "It's a draw!",
     botThinking: "Bot is planning the next move.",
-    loadingStatus: (player, category) => `Loading a ${category || "subject"} question for Player ${player}.`,
-    answeringStatus: (player, category) => `Player ${player} is answering a ${category} question.`,
-    choosingStatus: (player) => `Player ${player} is choosing a subject for a tile.`,
+    loadingStatus: (player, category) => `Loading a ${category || "subject"} question for ${formatEnglishCompetitor(player)}.`,
+    answeringStatus: (player, category) => `${formatEnglishCompetitor(player)} is answering a ${category} question.`,
+    choosingStatus: (player) => `${formatEnglishCompetitor(player)} is choosing a subject for a tile.`,
     loadingSubjectsPrompt: "Loading question subjects...",
     loadingSubjectsMeta: "The game is loading local subjects so players can choose a topic before each move.",
     loadSubjectsErrorPrompt: "We couldn't load subjects yet.",
@@ -361,18 +384,18 @@ const text = {
     idlePrompt: "Choose a subject to unlock a move.",
     idleMeta: "Tap an open tile first. Then the active player can choose a subject and get a random question from the local question folder.",
     subjectPrompt: (tile) => `Choose a subject for ${tile}.`,
-    subjectMeta: (player, nextPlayer) => `Player ${player}, pick the topic for your question. A wrong answer passes this same tile to Player ${nextPlayer}.`,
+    subjectMeta: (player, nextPlayer) => `${formatEnglishCompetitor(player)}, pick the topic for your question. A wrong answer passes this same tile to ${formatEnglishCompetitor(nextPlayer)}.`,
     findingPrompt: (category) => `Finding a ${category} question...`,
-    findingMeta: (player, category, tile) => `Player ${player} is getting a random ${category} question for ${tile}.`,
-    answerPrompt: (player, category, tile) => `Player ${player}, answer this ${category} question to claim ${tile}.`,
+    findingMeta: (player, category, tile) => `${formatEnglishCompetitor(player)} is getting a random ${category} question for ${tile}.`,
+    answerPrompt: (player, category, tile) => `${formatEnglishCompetitor(player)}, answer this ${category} question to claim ${tile}.`,
     noteReady: "Tap a tile when you're ready to start.",
     noteLoadingSubjects: "Loading question subjects...",
-    noteChooseSubject: (player, tile) => `Player ${player}, choose a subject for ${tile}.`,
-    notePickedSubject: (player, category) => `Player ${player} picked ${category}.`,
-    noteLoadingQuestion: (player, category) => `Loading a random ${category} question for Player ${player}.`,
-    noteAnswerToClaim: (player, tile) => `Player ${player}, answer correctly to claim ${tile}.`,
-    noteCorrectClaim: (player, tile, category) => `Correct. Player ${player} claimed ${tile} with ${category}.`,
-    noteWrongHandoff: (player, category) => `Wrong answer. Player ${player} now gets a new ${category} question for the same tile.`,
+    noteChooseSubject: (player, tile) => `${formatEnglishCompetitor(player)}, choose a subject for ${tile}.`,
+    notePickedSubject: (player, category) => `${formatEnglishCompetitor(player)} picked ${category}.`,
+    noteLoadingQuestion: (player, category) => `Loading a random ${category} question for ${formatEnglishCompetitor(player)}.`,
+    noteAnswerToClaim: (player, tile) => `${formatEnglishCompetitor(player)}, answer correctly to claim ${tile}.`,
+    noteCorrectClaim: (player, tile, category) => `Correct. ${formatEnglishCompetitor(player)} claimed ${tile} with ${category}.`,
+    noteWrongHandoff: (player, category) => `Wrong answer. ${formatEnglishCompetitor(player)} now gets a new ${category} question for the same tile.`,
     noteTapChoose: "Tap a tile, then choose a subject to get a random question from the local folder.",
     validSubjectError: "Please choose a valid subject.",
     noQuestionsFound: (subject) => `No questions were found for ${subject}.`,
@@ -391,6 +414,11 @@ const text = {
     botLevelMedium: "متوسط",
     botLevelHard: "صعب",
     languageLabel: "اللغة",
+    playerXNameLabel: "اسم اللاعب X",
+    playerONameLabel: "اسم اللاعب O",
+    botNameLabel: "اسم البوت",
+    namePlaceholder: "اكتب اسماً",
+    botName: "البوت",
     setupTitle: "إعداد اللعبة",
     setupHint: "اضغط أولاً على وضع اللعب، ثم عدّل مستوى البوت إذا أردت وابدأ اللعب مباشرة.",
     guideTitle: "طريقة اللعب",
@@ -413,14 +441,14 @@ const text = {
     loadingBadge: (player) => `جارٍ التحميل: ${player}`,
     questionBadge: (player) => `السؤال: ${player}`,
     subjectBadge: (player) => `الموضوع: ${player}`,
-    player: (player) => `اللاعب ${player}`,
-    currentTurn: (player) => `دور اللاعب ${player}`,
-    winner: (player) => `فاز اللاعب ${player}!`,
+    player: (player) => formatArabicCompetitor(player),
+    currentTurn: (player) => `دور ${formatArabicCompetitor(player)}`,
+    winner: (player) => `فاز ${formatArabicCompetitor(player)}!`,
     draw: "انتهت المباراة بالتعادل!",
     botThinking: "البوت يخطط للحركة التالية.",
-    loadingStatus: (player, category) => `جارٍ تحميل سؤال ${category || "موضوع"} للاعب ${player}.`,
-    answeringStatus: (player, category) => `اللاعب ${player} يجيب عن سؤال ${category}.`,
-    choosingStatus: (player) => `اللاعب ${player} يختار موضوعاً لخانة.`,
+    loadingStatus: (player, category) => `جارٍ تحميل سؤال ${category || "موضوع"} لـ${formatArabicCompetitor(player)}.`,
+    answeringStatus: (player, category) => `${formatArabicCompetitor(player)} يجيب عن سؤال ${category}.`,
+    choosingStatus: (player) => `${formatArabicCompetitor(player)} يختار موضوعاً لخانة.`,
     loadingSubjectsPrompt: "جارٍ تحميل مواضيع الأسئلة...",
     loadingSubjectsMeta: "تقوم اللعبة بتحميل المواضيع المحلية ليختار اللاعب موضوعاً قبل كل حركة.",
     loadSubjectsErrorPrompt: "تعذر تحميل المواضيع حالياً.",
@@ -428,18 +456,18 @@ const text = {
     idlePrompt: "اختر موضوعاً لبدء الحركة.",
     idleMeta: "اضغط على خانة فارغة أولاً، ثم اختر الموضوع لتحصل على سؤال عشوائي من مجلد الأسئلة المحلي.",
     subjectPrompt: (tile) => `اختر موضوعاً للخانة ${tile}.`,
-    subjectMeta: (player, nextPlayer) => `اللاعب ${player}، اختر موضوع السؤال. إذا كانت الإجابة خاطئة فستنتقل هذه الخانة نفسها إلى اللاعب ${nextPlayer}.`,
+    subjectMeta: (player, nextPlayer) => `${formatArabicCompetitor(player)}، اختر موضوع السؤال. إذا كانت الإجابة خاطئة فستنتقل هذه الخانة نفسها إلى ${formatArabicCompetitor(nextPlayer)}.`,
     findingPrompt: (category) => `جارٍ البحث عن سؤال من ${category}...`,
-    findingMeta: (player, category, tile) => `يحصل اللاعب ${player} على سؤال عشوائي من ${category} للخانة ${tile}.`,
-    answerPrompt: (player, category, tile) => `اللاعب ${player}، أجب عن سؤال ${category} للفوز بالخانة ${tile}.`,
+    findingMeta: (player, category, tile) => `يحصل ${formatArabicCompetitor(player)} على سؤال عشوائي من ${category} للخانة ${tile}.`,
+    answerPrompt: (player, category, tile) => `${formatArabicCompetitor(player)}، أجب عن سؤال ${category} للفوز بالخانة ${tile}.`,
     noteReady: "اضغط على خانة عندما تكون جاهزاً للبدء.",
     noteLoadingSubjects: "جارٍ تحميل مواضيع الأسئلة...",
-    noteChooseSubject: (player, tile) => `اللاعب ${player}، اختر موضوعاً للخانة ${tile}.`,
-    notePickedSubject: (player, category) => `اختار اللاعب ${player} موضوع ${category}.`,
-    noteLoadingQuestion: (player, category) => `جارٍ تحميل سؤال عشوائي من ${category} للاعب ${player}.`,
-    noteAnswerToClaim: (player, tile) => `اللاعب ${player}، أجب بشكل صحيح للفوز بالخانة ${tile}.`,
-    noteCorrectClaim: (player, tile, category) => `إجابة صحيحة. فاز اللاعب ${player} بالخانة ${tile} عبر موضوع ${category}.`,
-    noteWrongHandoff: (player, category) => `إجابة خاطئة. يحصل اللاعب ${player} الآن على سؤال جديد من ${category} للخانة نفسها.`,
+    noteChooseSubject: (player, tile) => `${formatArabicCompetitor(player)}، اختر موضوعاً للخانة ${tile}.`,
+    notePickedSubject: (player, category) => `اختار ${formatArabicCompetitor(player)} موضوع ${category}.`,
+    noteLoadingQuestion: (player, category) => `جارٍ تحميل سؤال عشوائي من ${category} لـ${formatArabicCompetitor(player)}.`,
+    noteAnswerToClaim: (player, tile) => `${formatArabicCompetitor(player)}، أجب بشكل صحيح للفوز بالخانة ${tile}.`,
+    noteCorrectClaim: (player, tile, category) => `إجابة صحيحة. فاز ${formatArabicCompetitor(player)} بالخانة ${tile} عبر موضوع ${category}.`,
+    noteWrongHandoff: (player, category) => `إجابة خاطئة. يحصل ${formatArabicCompetitor(player)} الآن على سؤال جديد من ${category} للخانة نفسها.`,
     noteTapChoose: "اضغط على خانة ثم اختر موضوعاً لتحصل على سؤال عشوائي من المجلد المحلي.",
     validSubjectError: "يرجى اختيار موضوع صحيح.",
     noQuestionsFound: (subject) => `لم يتم العثور على أسئلة لموضوع ${subject}.`,
@@ -566,6 +594,10 @@ function setupGame() {
   const levelMediumButton = document.getElementById("levelMediumButton");
   const levelHardButton = document.getElementById("levelHardButton");
   const languageSelect = document.getElementById("languageSelect");
+  const playerXNameLabel = document.getElementById("playerXNameLabel");
+  const playerONameLabel = document.getElementById("playerONameLabel");
+  const playerXNameInput = document.getElementById("playerXNameInput");
+  const playerONameInput = document.getElementById("playerONameInput");
   const setupTitle = document.getElementById("setupTitle");
   const setupHint = document.getElementById("setupHint");
   const guideTitle = document.getElementById("guideTitle");
@@ -593,6 +625,7 @@ function setupGame() {
   let challenge = null;
   let noteState = { key: "noteReady", params: {} };
   let botActionTimer = null;
+  const playerNameOverrides = { X: "", O: "" };
 
   const playerSubjects = { X: "", O: "" };
   const questionSets = new Map();
@@ -643,7 +676,37 @@ function setupGame() {
   }
 
   function playerLabel(player) {
+    const customName = playerNameOverrides[player]?.trim();
+    if (customName) {
+      return customName;
+    }
+
+    if (isBotPlayer(player)) {
+      return lang().botName;
+    }
+
     return lang().player(player);
+  }
+
+  function syncInputValue(input, value) {
+    if (document.activeElement !== input) {
+      input.value = value;
+    }
+  }
+
+  function normalizePlayerName(value) {
+    return value.replace(/\s+/g, " ").trim().slice(0, 18);
+  }
+
+  function updatePlayerName(player, nextValue) {
+    const normalizedValue = normalizePlayerName(nextValue);
+    const defaultName = isBotPlayer(player) ? lang().botName : lang().player(player);
+
+    playerNameOverrides[player] = normalizedValue && normalizedValue !== defaultName
+      ? normalizedValue
+      : "";
+
+    render();
   }
 
   function formatTileLabel(index) {
@@ -658,21 +721,21 @@ function setupGame() {
 
     switch (key) {
       case "noteChooseSubject":
-        return strings.noteChooseSubject(params.player, formatTileLabel(params.tileIndex));
+        return strings.noteChooseSubject(playerLabel(params.player), formatTileLabel(params.tileIndex));
       case "notePickedSubject":
-        return strings.notePickedSubject(params.player, localizeSubjectName(params.categoryId, params.categoryName));
+        return strings.notePickedSubject(playerLabel(params.player), localizeSubjectName(params.categoryId, params.categoryName));
       case "noteLoadingQuestion":
-        return strings.noteLoadingQuestion(params.player, localizeSubjectName(params.categoryId, params.categoryName));
+        return strings.noteLoadingQuestion(playerLabel(params.player), localizeSubjectName(params.categoryId, params.categoryName));
       case "noteAnswerToClaim":
-        return strings.noteAnswerToClaim(params.player, formatTileLabel(params.tileIndex));
+        return strings.noteAnswerToClaim(playerLabel(params.player), formatTileLabel(params.tileIndex));
       case "noteCorrectClaim":
         return strings.noteCorrectClaim(
-          params.player,
+          playerLabel(params.player),
           formatTileLabel(params.tileIndex),
           localizeSubjectName(params.categoryId, params.categoryName)
         );
       case "noteWrongHandoff":
-        return strings.noteWrongHandoff(params.player, localizeSubjectName(params.categoryId, params.categoryName));
+        return strings.noteWrongHandoff(playerLabel(params.player), localizeSubjectName(params.categoryId, params.categoryName));
       case "noteTapChoose":
       case "noteReady":
       case "noteLoadingSubjects":
@@ -728,6 +791,12 @@ function setupGame() {
       button.disabled = !isBotMode();
     });
     languageLabel.textContent = strings.languageLabel;
+    playerXNameLabel.textContent = strings.playerXNameLabel;
+    playerONameLabel.textContent = isBotMode() ? strings.botNameLabel : strings.playerONameLabel;
+    playerXNameInput.placeholder = strings.namePlaceholder;
+    playerONameInput.placeholder = strings.namePlaceholder;
+    syncInputValue(playerXNameInput, playerLabel("X"));
+    syncInputValue(playerONameInput, playerLabel("O"));
     setupTitle.textContent = strings.setupTitle;
     setupHint.textContent = strings.setupHint;
     guideTitle.textContent = strings.guideTitle;
@@ -756,19 +825,19 @@ function setupGame() {
     const categoryName = challenge?.categoryId ? localizeSubjectName(challenge.categoryId) : "";
 
     if (challenge?.phase === "loading") {
-      return strings.loadingStatus(challenge.player, categoryName);
+      return strings.loadingStatus(playerLabel(challenge.player), categoryName);
     }
 
     if (challenge?.phase === "question") {
-      return strings.answeringStatus(challenge.player, categoryName);
+      return strings.answeringStatus(playerLabel(challenge.player), categoryName);
     }
 
     if (challenge?.phase === "subject") {
-      return strings.choosingStatus(challenge.player);
+      return strings.choosingStatus(playerLabel(challenge.player));
     }
 
     if (state.winner) {
-      return strings.winner(state.winner);
+      return strings.winner(playerLabel(state.winner));
     }
 
     if (state.isDraw) {
@@ -779,7 +848,7 @@ function setupGame() {
       return strings.botThinking;
     }
 
-    return strings.currentTurn(state.currentPlayer);
+    return strings.currentTurn(playerLabel(state.currentPlayer));
   }
 
   function updateTurnBadge() {
@@ -883,21 +952,21 @@ function setupGame() {
 
     if (challenge.phase === "subject") {
       questionPrompt.textContent = strings.subjectPrompt(tileLabel);
-      questionMeta.textContent = strings.subjectMeta(challenge.player, getNextPlayer(challenge.player));
+      questionMeta.textContent = strings.subjectMeta(playerLabel(challenge.player), playerLabel(getNextPlayer(challenge.player)));
       questionResult.textContent = formatNote();
       return;
     }
 
     if (challenge.phase === "loading") {
       questionPrompt.textContent = strings.findingPrompt(categoryName);
-      questionMeta.textContent = strings.findingMeta(challenge.player, categoryName, tileLabel);
+      questionMeta.textContent = strings.findingMeta(playerLabel(challenge.player), categoryName, tileLabel);
       questionResult.textContent = formatNote();
       return;
     }
 
     const localizedQuestion = localizeQuestion(challenge.question);
     questionPrompt.textContent = localizedQuestion.prompt;
-    questionMeta.textContent = strings.answerPrompt(challenge.player, categoryName, tileLabel);
+    questionMeta.textContent = strings.answerPrompt(playerLabel(challenge.player), categoryName, tileLabel);
     questionResult.textContent = formatNote();
 
     localizedQuestion.choices.forEach((choice, index) => {
@@ -1346,6 +1415,22 @@ function setupGame() {
 
   languageSelect.addEventListener("change", (event) => {
     currentLanguage = event.target.value === "ar" ? "ar" : "en";
+    render();
+  });
+
+  playerXNameInput.addEventListener("input", (event) => {
+    updatePlayerName("X", event.target.value);
+  });
+
+  playerONameInput.addEventListener("input", (event) => {
+    updatePlayerName("O", event.target.value);
+  });
+
+  playerXNameInput.addEventListener("blur", () => {
+    render();
+  });
+
+  playerONameInput.addEventListener("blur", () => {
     render();
   });
 
