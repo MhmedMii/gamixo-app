@@ -356,6 +356,8 @@ const text = {
     pills: ["Arcade Style", "2 Players", "Fast Rounds"],
     pillsBot: ["Arcade Style", "Vs Bot", "Fast Rounds"],
     turnLabel: "Current Turn",
+    progressLabel: "Round Progress",
+    progressValue: (current, total) => `${current} / ${total}`,
     quizKicker: "Question Challenge",
     subjectLabel: "Subject",
     loadQuestionButton: "Get Question",
@@ -428,6 +430,8 @@ const text = {
     pills: ["أسلوب أركيد", "لاعبان", "جولات سريعة"],
     pillsBot: ["أسلوب أركيد", "ضد البوت", "جولات سريعة"],
     turnLabel: "الدور الحالي",
+    progressLabel: "تقدم الجولة",
+    progressValue: (current, total) => `${current} / ${total}`,
     quizKicker: "تحدي الأسئلة",
     subjectLabel: "الموضوع",
     loadQuestionButton: "احصل على سؤال",
@@ -603,6 +607,9 @@ function setupGame() {
   const guideTitle = document.getElementById("guideTitle");
   const guideText = document.getElementById("guideText");
   const subtitleText = document.getElementById("subtitleText");
+  const progressLabel = document.getElementById("progressLabel");
+  const progressValue = document.getElementById("progressValue");
+  const progressFill = document.getElementById("progressFill");
   const highlightsStrip = document.getElementById("highlightsStrip");
   const pillArcade = document.getElementById("pillArcade");
   const pillPlayers = document.getElementById("pillPlayers");
@@ -802,6 +809,7 @@ function setupGame() {
     guideTitle.textContent = strings.guideTitle;
     guideText.textContent = strings.guideText;
     subtitleText.textContent = strings.subtitle;
+    progressLabel.textContent = strings.progressLabel;
     highlightsStrip.setAttribute("aria-label", strings.highlightsAria);
     pillArcade.textContent = pills[0];
     pillPlayers.textContent = pills[1];
@@ -881,6 +889,15 @@ function setupGame() {
       : state.isDraw
         ? "draw"
         : "active";
+  }
+
+  function updateProgressStatus() {
+    const totalMoves = state.board.length;
+    const playedMoves = state.board.filter(Boolean).length;
+    const progressPercent = totalMoves === 0 ? 0 : (playedMoves / totalMoves) * 100;
+
+    progressValue.textContent = lang().progressValue(playedMoves, totalMoves);
+    progressFill.style.width = `${progressPercent}%`;
   }
 
   function renderSubjectOptions() {
@@ -998,6 +1015,7 @@ function setupGame() {
     statusMessage.textContent = getStatusMessage();
     updateTurnBadge();
     updateBodyState();
+    updateProgressStatus();
     renderChallenge();
     scheduleBotAction();
   }

@@ -79,10 +79,7 @@ body::before {
 }
 
 .hero-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.9fr);
-  gap: 20px;
-  align-items: start;
+  display: block;
 }
 
 .brand-panel {
@@ -143,7 +140,6 @@ h1 {
   font-size: 0.9rem;
 }
 
-.status-panel,
 .settings-card,
 .guide-card,
 .quiz-panel,
@@ -153,13 +149,6 @@ h1 {
   border: 1px solid var(--border-soft);
   background: var(--bg-panel);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.status-panel {
-  padding: 20px 22px;
-  display: grid;
-  gap: 10px;
-  min-height: 100%;
 }
 
 .turn-indicator {
@@ -186,6 +175,54 @@ h1 {
   font-size: 1.02rem;
   font-weight: 700;
   line-height: 1.5;
+}
+
+.board-status {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(160px, 220px);
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.progress-block {
+  display: grid;
+  gap: 8px;
+}
+
+.progress-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.progress-value {
+  color: var(--text-main);
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.progress-track {
+  position: relative;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-strong));
+  box-shadow: 0 0 18px rgba(255, 106, 0, 0.24);
+  transition: width 180ms ease;
 }
 
 .play-layout {
@@ -605,11 +642,11 @@ body[data-turn="O"] .turn-badge {
   color: var(--accent-strong);
 }
 
-body[data-outcome="win"] .status-panel {
+body[data-outcome="win"] .board-status {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 214, 122, 0.12));
 }
 
-body[data-outcome="draw"] .status-panel {
+body[data-outcome="draw"] .board-status {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 106, 0, 0.1));
 }
 
@@ -634,6 +671,10 @@ html[dir="rtl"] .hero-header {
 
 html[dir="rtl"] .controls {
   justify-content: flex-end;
+}
+
+html[dir="rtl"] .progress-copy {
+  flex-direction: row-reverse;
 }
 
 @keyframes rise-in {
@@ -669,13 +710,8 @@ html[dir="rtl"] .controls {
 }
 
 @media (max-width: 960px) {
-  .hero-header,
   .play-layout {
     grid-template-columns: 1fr;
-  }
-
-  .status-panel {
-    min-height: auto;
   }
 }
 
@@ -706,6 +742,12 @@ html[dir="rtl"] .controls {
   .board-caption {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .board-status {
+    flex-direction: column;
+    align-items: flex-start;
+    grid-template-columns: 1fr;
   }
 
   .board {

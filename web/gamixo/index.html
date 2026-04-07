@@ -26,25 +26,6 @@
             <span id="pillRounds" class="fun-pill">Fast Rounds</span>
           </div>
         </div>
-
-        <section id="quizPanel" class="quiz-panel" aria-live="polite">
-          <div class="quiz-copy">
-            <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
-            <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
-            <p id="questionMeta" class="quiz-meta">
-              Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
-            </p>
-          </div>
-          <div class="subject-controls">
-            <label class="subject-picker" for="subjectSelect">
-              <span id="subjectLabel" class="subject-label">Subject</span>
-              <select id="subjectSelect" class="subject-select"></select>
-            </label>
-            <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
-          </div>
-          <div id="choiceList" class="choice-list" role="list"></div>
-          <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
-        </section>
       </header>
 
       <div class="play-layout">
@@ -53,6 +34,22 @@
             <div class="board-caption">
               <span id="boardCaptionLead">Pick a tile and start the showdown.</span>
               <span id="boardCaptionAccent" class="caption-accent">First line of three wins.</span>
+            </div>
+            <div class="board-status">
+              <div class="turn-indicator">
+                <span id="turnLabel" class="turn-label">Current Turn</span>
+                <strong id="turnBadge" class="turn-badge">Player X</strong>
+              </div>
+              <p id="statusMessage" class="status-message">Player X's turn</p>
+              <div class="progress-block">
+                <div class="progress-copy">
+                  <span id="progressLabel" class="turn-label">Round Progress</span>
+                  <strong id="progressValue" class="progress-value">0 / 9</strong>
+                </div>
+                <div class="progress-track" aria-hidden="true">
+                  <span id="progressFill" class="progress-fill"></span>
+                </div>
+              </div>
             </div>
             <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
               <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
@@ -73,13 +70,24 @@
         </section>
 
         <aside class="side-panel">
-          <div class="status-panel">
-            <div class="turn-indicator">
-              <span id="turnLabel" class="turn-label">Current Turn</span>
-              <strong id="turnBadge" class="turn-badge">Player X</strong>
+          <section id="quizPanel" class="quiz-panel" aria-live="polite">
+            <div class="quiz-copy">
+              <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
+              <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
+              <p id="questionMeta" class="quiz-meta">
+                Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
+              </p>
             </div>
-            <p id="statusMessage" class="status-message">Player X's turn</p>
-          </div>
+            <div class="subject-controls">
+              <label class="subject-picker" for="subjectSelect">
+                <span id="subjectLabel" class="subject-label">Subject</span>
+                <select id="subjectSelect" class="subject-select"></select>
+              </label>
+              <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
+            </div>
+            <div id="choiceList" class="choice-list" role="list"></div>
+            <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
+          </section>
 
           <section class="settings-card">
             <div class="settings-copy">
