@@ -690,6 +690,10 @@ function setupGame() {
   }
 
   function syncInputValue(input, value) {
+    if (!input) {
+      return;
+    }
+
     if (document.activeElement !== input) {
       input.value = value;
     }
@@ -792,10 +796,18 @@ function setupGame() {
       button.disabled = !isBotMode();
     });
     languageLabel.textContent = strings.languageLabel;
-    playerXNameLabel.textContent = strings.playerXNameLabel;
-    playerONameLabel.textContent = isBotMode() ? strings.botNameLabel : strings.playerONameLabel;
-    playerXNameInput.placeholder = strings.namePlaceholder;
-    playerONameInput.placeholder = strings.namePlaceholder;
+    if (playerXNameLabel) {
+      playerXNameLabel.textContent = strings.playerXNameLabel;
+    }
+    if (playerONameLabel) {
+      playerONameLabel.textContent = isBotMode() ? strings.botNameLabel : strings.playerONameLabel;
+    }
+    if (playerXNameInput) {
+      playerXNameInput.placeholder = strings.namePlaceholder;
+    }
+    if (playerONameInput) {
+      playerONameInput.placeholder = strings.namePlaceholder;
+    }
     syncInputValue(playerXNameInput, playerLabel("X"));
     syncInputValue(playerONameInput, playerLabel("O"));
     setupTitle.textContent = strings.setupTitle;
@@ -1428,21 +1440,25 @@ function setupGame() {
     render();
   });
 
-  playerXNameInput.addEventListener("input", (event) => {
-    updatePlayerName("X", event.target.value);
-  });
+  if (playerXNameInput) {
+    playerXNameInput.addEventListener("input", (event) => {
+      updatePlayerName("X", event.target.value);
+    });
 
-  playerONameInput.addEventListener("input", (event) => {
-    updatePlayerName("O", event.target.value);
-  });
+    playerXNameInput.addEventListener("blur", () => {
+      render();
+    });
+  }
 
-  playerXNameInput.addEventListener("blur", () => {
-    render();
-  });
+  if (playerONameInput) {
+    playerONameInput.addEventListener("input", (event) => {
+      updatePlayerName("O", event.target.value);
+    });
 
-  playerONameInput.addEventListener("blur", () => {
-    render();
-  });
+    playerONameInput.addEventListener("blur", () => {
+      render();
+    });
+  }
 
   modeSelect.addEventListener("change", (event) => {
     gameMode = event.target.value === "bot" ? "bot" : "human";

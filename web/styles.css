@@ -50,7 +50,8 @@ body::before {
   min-height: 100vh;
   padding: 28px;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  align-items: start;
   overflow: hidden;
 }
 
