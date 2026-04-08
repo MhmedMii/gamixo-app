@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gamixo</title>
-  <link rel="stylesheet" href="../styles.css?v=20260408-1">
+  <link rel="stylesheet" href="../styles.css?v=20260408-2">
 </head>
 <body>
   <main class="app-shell">
@@ -100,6 +100,17 @@
                   <option value="bot">Play With Bot</option>
                 </select>
               </div>
+              <div class="play-style-switcher">
+                <label id="playStyleLabel" class="language-label" for="playStyleSelect">Turn Style</label>
+                <div class="option-grid" role="group" aria-labelledby="playStyleLabel">
+                  <button id="playStyleQuestionsButton" class="option-card" type="button" data-play-style="questions">With Questions</button>
+                  <button id="playStyleDirectButton" class="option-card" type="button" data-play-style="direct">Direct Play</button>
+                </div>
+                <select id="playStyleSelect" class="language-select visually-hidden">
+                  <option value="questions">With Questions</option>
+                  <option value="direct">Direct Play</option>
+                </select>
+              </div>
               <div class="language-switcher">
                 <label id="languageLabel" class="language-label" for="languageSelect">Language</label>
                 <select id="languageSelect" class="language-select">
@@ -133,6 +144,6 @@
     </section>
   </main>
 
-  <script src="../script.js?v=20260408-1"></script>
+  <script src="../script.js?v=20260408-2"></script>
 </body>
 </html>

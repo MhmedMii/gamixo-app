@@ -396,6 +396,7 @@ h1 {
   grid-template-areas:
     "level"
     "mode"
+    "style"
     "language";
   gap: 16px;
 }
@@ -406,6 +407,7 @@ h1 {
 
 .mode-switcher,
 .level-switcher,
+.play-style-switcher,
 .language-switcher,
 .subject-picker {
   display: grid;
@@ -418,6 +420,10 @@ h1 {
 
 .level-switcher {
   grid-area: level;
+}
+
+.play-style-switcher {
+  grid-area: style;
 }
 
 .language-switcher {

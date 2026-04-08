@@ -341,10 +341,13 @@ const text = {
     botLevelEasy: "Easy",
     botLevelMedium: "Medium",
     botLevelHard: "Hard",
+    playStyleLabel: "Turn Style",
+    playStyleQuestions: "With Questions",
+    playStyleDirect: "Direct Play",
     languageLabel: "Language",
     botName: "Bot",
     setupTitle: "Game Setup",
-    setupHint: "Tap a play mode first, then adjust the bot if needed and start playing.",
+    setupHint: "Choose a mode, choose direct play or questions, adjust the bot if needed, and then start playing.",
     subtitle: "Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.",
     highlightsAria: "Game highlights",
     pills: ["Arcade Style", "2 Players", "Fast Rounds"],
@@ -393,6 +396,7 @@ const text = {
     noteCorrectClaim: (player, tile, category) => `Correct. ${formatEnglishCompetitor(player)} claimed ${tile} with ${category}.`,
     noteWrongHandoff: (player, category) => `Wrong answer. ${formatEnglishCompetitor(player)} now gets a new ${category} question for the same tile.`,
     noteTapChoose: "Tap a tile, then choose a subject to get a random question from the local folder.",
+    noteDirectReady: "Tap any empty tile to play instantly.",
     validSubjectError: "Please choose a valid subject.",
     noQuestionsFound: (subject) => `No questions were found for ${subject}.`,
     unableLoadSubjects: "Unable to load subjects.",
@@ -409,10 +413,13 @@ const text = {
     botLevelEasy: "سهل",
     botLevelMedium: "متوسط",
     botLevelHard: "صعب",
+    playStyleLabel: "أسلوب اللعب",
+    playStyleQuestions: "بالأسئلة",
+    playStyleDirect: "مباشر",
     languageLabel: "اللغة",
     botName: "البوت",
     setupTitle: "إعداد اللعبة",
-    setupHint: "اضغط أولاً على وضع اللعب، ثم عدّل مستوى البوت إذا أردت وابدأ اللعب مباشرة.",
+    setupHint: "اختر وضع اللعب، ثم اختر اللعب المباشر أو بالأسئلة، وعدّل مستوى البوت إذا أردت وابدأ اللعب.",
     subtitle: "لعبة إكس أو مطورة للمتصفح. اختر خانة، خذ دورك، وحاول تكوين ثلاثة رموز متتالية قبل اللاعب الآخر.",
     highlightsAria: "مميزات اللعبة",
     pills: ["أسلوب أركيد", "لاعبان", "جولات سريعة"],
@@ -461,6 +468,7 @@ const text = {
     noteCorrectClaim: (player, tile, category) => `إجابة صحيحة. فاز ${formatArabicCompetitor(player)} بالخانة ${tile} عبر موضوع ${category}.`,
     noteWrongHandoff: (player, category) => `إجابة خاطئة. يحصل ${formatArabicCompetitor(player)} الآن على سؤال جديد من ${category} للخانة نفسها.`,
     noteTapChoose: "اضغط على خانة ثم اختر موضوعاً لتحصل على سؤال عشوائي من المجلد المحلي.",
+    noteDirectReady: "اضغط على أي خانة فارغة لتلعب مباشرة.",
     validSubjectError: "يرجى اختيار موضوع صحيح.",
     noQuestionsFound: (subject) => `لم يتم العثور على أسئلة لموضوع ${subject}.`,
     unableLoadSubjects: "تعذر تحميل المواضيع.",
@@ -580,11 +588,15 @@ function setupGame() {
   const modeSelect = document.getElementById("modeSelect");
   const botLevelSelect = document.getElementById("botLevelSelect");
   const levelSwitcher = document.querySelector(".level-switcher");
+  const playStyleSwitcher = document.querySelector(".play-style-switcher");
   const modeHumanButton = document.getElementById("modeHumanButton");
   const modeBotButton = document.getElementById("modeBotButton");
   const levelEasyButton = document.getElementById("levelEasyButton");
   const levelMediumButton = document.getElementById("levelMediumButton");
   const levelHardButton = document.getElementById("levelHardButton");
+  const playStyleQuestionsButton = document.getElementById("playStyleQuestionsButton");
+  const playStyleDirectButton = document.getElementById("playStyleDirectButton");
+  const playStyleSelect = document.getElementById("playStyleSelect");
   const languageSelect = document.getElementById("languageSelect");
   const setupTitle = document.getElementById("setupTitle");
   const setupHint = document.getElementById("setupHint");
@@ -603,12 +615,14 @@ function setupGame() {
   const boardCaptionAccent = document.getElementById("boardCaptionAccent");
   const modeLabel = document.getElementById("modeLabel");
   const botLevelLabel = document.getElementById("botLevelLabel");
+  const playStyleLabel = document.getElementById("playStyleLabel");
   const languageLabel = document.getElementById("languageLabel");
   const cells = Array.from(boardElement.querySelectorAll(".cell"));
 
   let currentLanguage = "en";
   let gameMode = "human";
   let botLevel = "medium";
+  let playStyle = "questions";
   let state = createGameState();
   let categoryState = createCategoryState();
   let challenge = null;
@@ -633,6 +647,10 @@ function setupGame() {
 
   function isBotPlayer(player) {
     return isBotMode() && player === "O";
+  }
+
+  function usesQuestions() {
+    return gameMode === "human" && playStyle === "questions";
   }
 
   function clearBotActionTimer() {
@@ -700,6 +718,7 @@ function setupGame() {
         return strings.noteWrongHandoff(playerLabel(params.player), localizeSubjectName(params.categoryId, params.categoryName));
       case "noteTapChoose":
       case "noteReady":
+      case "noteDirectReady":
       case "noteLoadingSubjects":
         return strings[key];
       case "custom":
@@ -726,6 +745,10 @@ function setupGame() {
       [levelMediumButton, botLevel === "medium"],
       [levelHardButton, botLevel === "hard"]
     ];
+    const playStyleButtons = [
+      [playStyleQuestionsButton, playStyle === "questions"],
+      [playStyleDirectButton, playStyle === "direct"]
+    ];
 
     modeLabel.textContent = strings.modeLabel;
     modeSelect.value = gameMode;
@@ -751,6 +774,17 @@ function setupGame() {
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", isActive ? "true" : "false");
       button.disabled = !isBotMode();
+    });
+    playStyleLabel.textContent = strings.playStyleLabel;
+    playStyleSelect.value = playStyle;
+    playStyleSelect.options[0].textContent = strings.playStyleQuestions;
+    playStyleSelect.options[1].textContent = strings.playStyleDirect;
+    playStyleQuestionsButton.textContent = strings.playStyleQuestions;
+    playStyleDirectButton.textContent = strings.playStyleDirect;
+    playStyleSwitcher.hidden = isBotMode();
+    playStyleButtons.forEach(([button, isActive]) => {
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
     languageLabel.textContent = strings.languageLabel;
     setupTitle.textContent = strings.setupTitle;
@@ -874,9 +908,9 @@ function setupGame() {
   }
 
   function renderChallenge() {
-    quizPanel.hidden = isBotMode();
+    quizPanel.hidden = !usesQuestions();
 
-    if (isBotMode()) {
+    if (!usesQuestions()) {
       return;
     }
 
@@ -954,7 +988,7 @@ function setupGame() {
       cell.disabled = Boolean(value)
         || Boolean(state.winner)
         || state.isDraw
-        || (!isBotMode() && Boolean(challenge))
+        || (usesQuestions() && Boolean(challenge))
         || isBotPlayer(state.currentPlayer);
       cell.classList.toggle("winning", state.winningPattern.includes(index));
     });
@@ -1281,6 +1315,10 @@ function setupGame() {
   }
 
   function getResetNoteKey() {
+    if (!usesQuestions()) {
+      return "noteDirectReady";
+    }
+
     if (isBotMode()) {
       return "noteReady";
     }
@@ -1307,9 +1345,9 @@ function setupGame() {
       return;
     }
 
-    if (isBotMode()) {
-      state = applyMove(state, index, "X");
-      setNote("noteReady");
+    if (!usesQuestions()) {
+      state = applyMove(state, index, state.currentPlayer);
+      setNote("noteDirectReady");
       render();
       return;
     }
@@ -1383,6 +1421,11 @@ function setupGame() {
     render();
   });
 
+  playStyleSelect.addEventListener("change", (event) => {
+    playStyle = event.target.value === "direct" ? "direct" : "questions";
+    resetGame();
+  });
+
   modeSelect.addEventListener("change", (event) => {
     gameMode = event.target.value === "bot" ? "bot" : "human";
     resetGame();
@@ -1401,6 +1444,22 @@ function setupGame() {
       return;
     }
     gameMode = "bot";
+    resetGame();
+  });
+
+  playStyleQuestionsButton.addEventListener("click", () => {
+    if (playStyle === "questions") {
+      return;
+    }
+    playStyle = "questions";
+    resetGame();
+  });
+
+  playStyleDirectButton.addEventListener("click", () => {
+    if (playStyle === "direct") {
+      return;
+    }
+    playStyle = "direct";
     resetGame();
   });
 
