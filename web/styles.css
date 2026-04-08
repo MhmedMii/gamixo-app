@@ -507,6 +507,13 @@ h1 {
   box-shadow: 0 16px 28px rgba(255, 106, 0, 0.16);
 }
 
+.option-card:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 .chip-button:disabled {
   opacity: 0.45;
   cursor: not-allowed;

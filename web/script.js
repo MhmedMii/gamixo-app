@@ -650,7 +650,7 @@ function setupGame() {
   }
 
   function usesQuestions() {
-    return gameMode === "human" && playStyle === "questions";
+    return playStyle === "questions";
   }
 
   function clearBotActionTimer() {
@@ -781,7 +781,9 @@ function setupGame() {
     playStyleSelect.options[1].textContent = strings.playStyleDirect;
     playStyleQuestionsButton.textContent = strings.playStyleQuestions;
     playStyleDirectButton.textContent = strings.playStyleDirect;
-    playStyleSwitcher.hidden = isBotMode();
+    playStyleSwitcher.hidden = false;
+    playStyleQuestionsButton.disabled = isBotMode();
+    playStyleSelect.disabled = isBotMode();
     playStyleButtons.forEach(([button, isActive]) => {
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", isActive ? "true" : "false");
@@ -1428,6 +1430,9 @@ function setupGame() {
 
   modeSelect.addEventListener("change", (event) => {
     gameMode = event.target.value === "bot" ? "bot" : "human";
+    if (gameMode === "bot") {
+      playStyle = "direct";
+    }
     resetGame();
   });
 
@@ -1444,10 +1449,14 @@ function setupGame() {
       return;
     }
     gameMode = "bot";
+    playStyle = "direct";
     resetGame();
   });
 
   playStyleQuestionsButton.addEventListener("click", () => {
+    if (isBotMode()) {
+      return;
+    }
     if (playStyle === "questions") {
       return;
     }
