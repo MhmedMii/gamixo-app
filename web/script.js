@@ -782,8 +782,8 @@ function setupGame() {
     playStyleQuestionsButton.textContent = strings.playStyleQuestions;
     playStyleDirectButton.textContent = strings.playStyleDirect;
     playStyleSwitcher.hidden = false;
-    playStyleQuestionsButton.disabled = isBotMode();
-    playStyleSelect.disabled = isBotMode();
+    playStyleQuestionsButton.disabled = false;
+    playStyleSelect.disabled = false;
     playStyleButtons.forEach(([button, isActive]) => {
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", isActive ? "true" : "false");
@@ -905,12 +905,14 @@ function setupGame() {
 
     subjectSelect.disabled = categoryState.loading
       || !challenge
+      || isBotPlayer(challenge?.player)
       || challenge.phase === "loading"
       || challenge.phase === "question";
   }
 
   function renderChallenge() {
     quizPanel.hidden = !usesQuestions();
+    quizPanel.style.display = usesQuestions() ? "grid" : "none";
 
     if (!usesQuestions()) {
       return;
@@ -922,6 +924,7 @@ function setupGame() {
 
     loadQuestionButton.disabled = categoryState.loading
       || !challenge
+      || isBotPlayer(challenge?.player)
       || challenge.phase === "loading"
       || challenge.phase === "question"
       || !challenge.categoryId;
@@ -1265,14 +1268,71 @@ function setupGame() {
       return;
     }
 
+    if (usesQuestions() && (categoryState.loading || categoryState.error || categoryState.items.length === 0)) {
+      return;
+    }
+
     const tileIndex = chooseBotMove(state.board);
     if (tileIndex === undefined) {
       return;
     }
 
-    state = applyMove(state, tileIndex, "O");
-    setNote("noteReady");
+    if (!usesQuestions()) {
+      state = applyMove(state, tileIndex, "O");
+      setNote("noteDirectReady");
+      render();
+      return;
+    }
+
+    const randomSubject = categoryState.items[Math.floor(Math.random() * categoryState.items.length)] || null;
+    const categoryId = randomSubject ? String(randomSubject.id) : "";
+
+    if (!categoryId) {
+      return;
+    }
+
+    playerSubjects.O = categoryId;
+    challenge = createChallenge(tileIndex, "O", categoryId);
+    setNote("notePickedSubject", {
+      player: "O",
+      categoryId,
+      categoryName: localizeSubjectName(categoryId, randomSubject.name)
+    });
     render();
+    loadQuestion();
+  }
+
+  function getBotAnswerSuccessRate() {
+    if (botLevel === "easy") {
+      return 0.45;
+    }
+
+    if (botLevel === "hard") {
+      return 0.9;
+    }
+
+    return 0.7;
+  }
+
+  function answerBotQuestion() {
+    if (!challenge || challenge.phase !== "question" || !isBotPlayer(challenge.player) || state.winner || state.isDraw) {
+      return;
+    }
+
+    if (Math.random() <= getBotAnswerSuccessRate()) {
+      state = applyMove(state, challenge.tileIndex, challenge.player);
+      setNote("noteCorrectClaim", {
+        player: challenge.player,
+        tileIndex: challenge.tileIndex,
+        categoryId: challenge.categoryId
+      });
+      challenge = null;
+      render();
+      return;
+    }
+
+    const previousChallenge = challenge;
+    handOffQuestionToNextPlayer(previousChallenge);
   }
 
   function scheduleBotAction() {
@@ -1283,6 +1343,11 @@ function setupGame() {
     }
 
     if (challenge) {
+      if (challenge.phase === "question" && isBotPlayer(challenge.player)) {
+        botActionTimer = window.setTimeout(() => {
+          answerBotQuestion();
+        }, getBotDelay());
+      }
       return;
     }
 
@@ -1430,9 +1495,6 @@ function setupGame() {
 
   modeSelect.addEventListener("change", (event) => {
     gameMode = event.target.value === "bot" ? "bot" : "human";
-    if (gameMode === "bot") {
-      playStyle = "direct";
-    }
     resetGame();
   });
 
@@ -1449,14 +1511,10 @@ function setupGame() {
       return;
     }
     gameMode = "bot";
-    playStyle = "direct";
     resetGame();
   });
 
   playStyleQuestionsButton.addEventListener("click", () => {
-    if (isBotMode()) {
-      return;
-    }
     if (playStyle === "questions") {
       return;
     }
