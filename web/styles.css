@@ -377,17 +377,6 @@ h1 {
   gap: 8px;
 }
 
-.name-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.name-field {
-  display: grid;
-  gap: 8px;
-}
-
 .panel-hint,
 .quiz-meta,
 .question-result {
@@ -528,8 +517,7 @@ h1 {
 }
 
 .language-select,
-.subject-select,
-.name-input {
+.subject-select {
   width: 100%;
   min-height: 56px;
   padding: 0 18px;
@@ -543,8 +531,7 @@ h1 {
 }
 
 .language-select:focus-visible,
-.subject-select:focus-visible,
-.name-input:focus-visible {
+.subject-select:focus-visible {
   outline: none;
   border-color: rgba(255, 106, 0, 0.45);
   box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
@@ -741,8 +728,7 @@ html[dir="rtl"] .progress-copy {
   }
 
   .option-grid,
-  .chip-group,
-  .name-grid {
+  .chip-group {
     grid-template-columns: 1fr;
   }
 
