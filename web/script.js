@@ -349,8 +349,6 @@ const text = {
     botName: "Bot",
     setupTitle: "Game Setup",
     setupHint: "Tap a play mode first, then adjust the bot if needed and start playing.",
-    guideTitle: "How To Play",
-    guideText: "In bot mode you can tap any empty tile to move instantly. In 2 player mode, pick a tile, choose a subject, then answer the question to claim the spot.",
     subtitle: "Tic-tac-toe rebuilt for the browser. Tap a tile, take your turn, and race to line up three marks before the other player does.",
     highlightsAria: "Game highlights",
     pills: ["Arcade Style", "2 Players", "Fast Rounds"],
@@ -423,8 +421,6 @@ const text = {
     botName: "البوت",
     setupTitle: "إعداد اللعبة",
     setupHint: "اضغط أولاً على وضع اللعب، ثم عدّل مستوى البوت إذا أردت وابدأ اللعب مباشرة.",
-    guideTitle: "طريقة اللعب",
-    guideText: "في وضع البوت يمكنك الضغط على أي خانة فارغة لتلعب فوراً. في وضع اللاعبين اختر خانة، ثم موضوعاً، ثم أجب عن السؤال للفوز بالخانة.",
     subtitle: "لعبة إكس أو مطورة للمتصفح. اختر خانة، خذ دورك، وحاول تكوين ثلاثة رموز متتالية قبل اللاعب الآخر.",
     highlightsAria: "مميزات اللعبة",
     pills: ["أسلوب أركيد", "لاعبان", "جولات سريعة"],
@@ -604,8 +600,6 @@ function setupGame() {
   const playerONameInput = document.getElementById("playerONameInput");
   const setupTitle = document.getElementById("setupTitle");
   const setupHint = document.getElementById("setupHint");
-  const guideTitle = document.getElementById("guideTitle");
-  const guideText = document.getElementById("guideText");
   const subtitleText = document.getElementById("subtitleText");
   const progressLabel = document.getElementById("progressLabel");
   const progressValue = document.getElementById("progressValue");
@@ -806,8 +800,6 @@ function setupGame() {
     syncInputValue(playerONameInput, playerLabel("O"));
     setupTitle.textContent = strings.setupTitle;
     setupHint.textContent = strings.setupHint;
-    guideTitle.textContent = strings.guideTitle;
-    guideText.textContent = strings.guideText;
     subtitleText.textContent = strings.subtitle;
     progressLabel.textContent = strings.progressLabel;
     highlightsStrip.setAttribute("aria-label", strings.highlightsAria);

@@ -70,25 +70,6 @@
         </section>
 
         <aside class="side-panel">
-          <section id="quizPanel" class="quiz-panel" aria-live="polite">
-            <div class="quiz-copy">
-              <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
-              <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
-              <p id="questionMeta" class="quiz-meta">
-                Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
-              </p>
-            </div>
-            <div class="subject-controls">
-              <label class="subject-picker" for="subjectSelect">
-                <span id="subjectLabel" class="subject-label">Subject</span>
-                <select id="subjectSelect" class="subject-select"></select>
-              </label>
-              <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
-            </div>
-            <div id="choiceList" class="choice-list" role="list"></div>
-            <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
-          </section>
-
           <section class="settings-card">
             <div class="settings-copy">
               <p id="setupTitle" class="panel-kicker">Game Setup</p>
@@ -129,11 +110,23 @@
             </div>
           </section>
 
-          <section class="guide-card">
-            <p id="guideTitle" class="panel-kicker">How To Play</p>
-            <p id="guideText" class="guide-text">
-              In bot mode you can tap any empty tile to move instantly. In 2 player mode, pick a tile, choose a subject, then answer the question to claim the spot.
-            </p>
+          <section id="quizPanel" class="quiz-panel" aria-live="polite">
+            <div class="quiz-copy">
+              <p id="quizKicker" class="quiz-kicker">Question Challenge</p>
+              <h2 id="questionPrompt" class="quiz-question">Answer a question to claim your tile.</h2>
+              <p id="questionMeta" class="quiz-meta">
+                Pick any open tile, choose a subject, and get a random question. Wrong answers pass that tile to the other player.
+              </p>
+            </div>
+            <div class="subject-controls">
+              <label class="subject-picker" for="subjectSelect">
+                <span id="subjectLabel" class="subject-label">Subject</span>
+                <select id="subjectSelect" class="subject-select"></select>
+              </label>
+              <button id="loadQuestionButton" class="subject-button" type="button">Get Question</button>
+            </div>
+            <div id="choiceList" class="choice-list" role="list"></div>
+            <p id="questionResult" class="question-result">Tap a tile when you're ready to start.</p>
           </section>
         </aside>
       </div>

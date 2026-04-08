@@ -141,7 +141,6 @@ h1 {
 }
 
 .settings-card,
-.guide-card,
 .quiz-panel,
 .board-frame {
   position: relative;
@@ -357,7 +356,6 @@ h1 {
 }
 
 .settings-card,
-.guide-card,
 .quiz-panel {
   padding: 20px;
 }
@@ -384,7 +382,6 @@ h1 {
 }
 
 .panel-hint,
-.guide-text,
 .quiz-meta,
 .question-result {
   margin: 0;
@@ -533,11 +530,6 @@ h1 {
   box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
 }
 
-.guide-card {
-  display: grid;
-  gap: 10px;
-}
-
 .quiz-panel {
   display: grid;
   gap: 18px;
@@ -659,7 +651,6 @@ html[dir="rtl"] .choice-button,
 html[dir="rtl"] .question-result,
 html[dir="rtl"] .subtitle,
 html[dir="rtl"] .panel-hint,
-html[dir="rtl"] .guide-text,
 html[dir="rtl"] .quiz-meta {
   text-align: right;
 }
