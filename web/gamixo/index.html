@@ -29,48 +29,7 @@
       </header>
 
       <div class="play-layout">
-        <section class="board-stage">
-          <div class="board-frame">
-            <div class="board-caption">
-              <span id="boardCaptionLead">Pick a tile and start the showdown.</span>
-              <span id="boardCaptionAccent" class="caption-accent">First line of three wins.</span>
-            </div>
-            <div class="board-status">
-              <div class="turn-indicator">
-                <span id="turnLabel" class="turn-label">Current Turn</span>
-                <strong id="turnBadge" class="turn-badge">Player X</strong>
-              </div>
-              <p id="statusMessage" class="status-message">Player X's turn</p>
-              <div class="progress-block">
-                <div class="progress-copy">
-                  <span id="progressLabel" class="turn-label">Round Progress</span>
-                  <strong id="progressValue" class="progress-value">0 / 9</strong>
-                </div>
-                <div class="progress-track" aria-hidden="true">
-                  <span id="progressFill" class="progress-fill"></span>
-                </div>
-              </div>
-            </div>
-            <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
-              <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
-              <button class="cell" type="button" data-index="1" aria-label="Row 1 Column 2"></button>
-              <button class="cell" type="button" data-index="2" aria-label="Row 1 Column 3"></button>
-              <button class="cell" type="button" data-index="3" aria-label="Row 2 Column 1"></button>
-              <button class="cell" type="button" data-index="4" aria-label="Row 2 Column 2"></button>
-              <button class="cell" type="button" data-index="5" aria-label="Row 2 Column 3"></button>
-              <button class="cell" type="button" data-index="6" aria-label="Row 3 Column 1"></button>
-              <button class="cell" type="button" data-index="7" aria-label="Row 3 Column 2"></button>
-              <button class="cell" type="button" data-index="8" aria-label="Row 3 Column 3"></button>
-            </div>
-          </div>
-
-          <div class="controls">
-            <button id="resetButton" class="reset-button" type="button">Play Again</button>
-          </div>
-        </section>
-
-        <aside class="side-panel">
-          <section class="settings-card">
+        <section class="settings-card">
             <div class="settings-copy">
               <p id="setupTitle" class="panel-kicker">Game Setup</p>
               <p id="setupHint" class="panel-hint">Choose a mode, choose direct play or questions, adjust the bot if needed, and start playing.</p>
@@ -139,7 +98,46 @@
             <div id="choiceList" class="choice-list" role="list"></div>
             <p id="questionResult" class="question-result">Tap a tile, then choose a subject to start.</p>
           </section>
-        </aside>
+
+        <section class="board-stage">
+          <div class="board-frame">
+            <div class="board-caption">
+              <span id="boardCaptionLead">Pick a tile and start the showdown.</span>
+              <span id="boardCaptionAccent" class="caption-accent">First line of three wins.</span>
+            </div>
+            <div class="board-status">
+              <div class="turn-indicator">
+                <span id="turnLabel" class="turn-label">Current Turn</span>
+                <strong id="turnBadge" class="turn-badge">Player X</strong>
+              </div>
+              <p id="statusMessage" class="status-message">Player X's turn</p>
+              <div class="progress-block">
+                <div class="progress-copy">
+                  <span id="progressLabel" class="turn-label">Round Progress</span>
+                  <strong id="progressValue" class="progress-value">0 / 9</strong>
+                </div>
+                <div class="progress-track" aria-hidden="true">
+                  <span id="progressFill" class="progress-fill"></span>
+                </div>
+              </div>
+            </div>
+            <div id="board" class="board" aria-label="Tic-Tac-Toe board" role="grid">
+              <button class="cell" type="button" data-index="0" aria-label="Row 1 Column 1"></button>
+              <button class="cell" type="button" data-index="1" aria-label="Row 1 Column 2"></button>
+              <button class="cell" type="button" data-index="2" aria-label="Row 1 Column 3"></button>
+              <button class="cell" type="button" data-index="3" aria-label="Row 2 Column 1"></button>
+              <button class="cell" type="button" data-index="4" aria-label="Row 2 Column 2"></button>
+              <button class="cell" type="button" data-index="5" aria-label="Row 2 Column 3"></button>
+              <button class="cell" type="button" data-index="6" aria-label="Row 3 Column 1"></button>
+              <button class="cell" type="button" data-index="7" aria-label="Row 3 Column 2"></button>
+              <button class="cell" type="button" data-index="8" aria-label="Row 3 Column 3"></button>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="resetButton" class="reset-button" type="button">Play Again</button>
+          </div>
+        </section>
       </div>
     </section>
   </main>

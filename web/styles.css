@@ -231,13 +231,15 @@ h1 {
 
 .play-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.86fr);
+  grid-template-columns: 1fr;
   gap: 22px;
   margin-top: 24px;
 }
 
 .board-stage,
-.side-panel {
+.side-panel,
+.settings-card,
+.quiz-panel {
   display: grid;
   gap: 18px;
   align-content: start;
