@@ -342,10 +342,6 @@ const text = {
     botLevelMedium: "Medium",
     botLevelHard: "Hard",
     languageLabel: "Language",
-    playerXNameLabel: "Player X Name",
-    playerONameLabel: "Player O Name",
-    botNameLabel: "Bot Name",
-    namePlaceholder: "Enter a name",
     botName: "Bot",
     setupTitle: "Game Setup",
     setupHint: "Tap a play mode first, then adjust the bot if needed and start playing.",
@@ -414,10 +410,6 @@ const text = {
     botLevelMedium: "متوسط",
     botLevelHard: "صعب",
     languageLabel: "اللغة",
-    playerXNameLabel: "اسم اللاعب X",
-    playerONameLabel: "اسم اللاعب O",
-    botNameLabel: "اسم البوت",
-    namePlaceholder: "اكتب اسماً",
     botName: "البوت",
     setupTitle: "إعداد اللعبة",
     setupHint: "اضغط أولاً على وضع اللعب، ثم عدّل مستوى البوت إذا أردت وابدأ اللعب مباشرة.",
@@ -594,10 +586,6 @@ function setupGame() {
   const levelMediumButton = document.getElementById("levelMediumButton");
   const levelHardButton = document.getElementById("levelHardButton");
   const languageSelect = document.getElementById("languageSelect");
-  const playerXNameLabel = document.getElementById("playerXNameLabel");
-  const playerONameLabel = document.getElementById("playerONameLabel");
-  const playerXNameInput = document.getElementById("playerXNameInput");
-  const playerONameInput = document.getElementById("playerONameInput");
   const setupTitle = document.getElementById("setupTitle");
   const setupHint = document.getElementById("setupHint");
   const subtitleText = document.getElementById("subtitleText");
@@ -626,7 +614,6 @@ function setupGame() {
   let challenge = null;
   let noteState = { key: "noteReady", params: {} };
   let botActionTimer = null;
-  const playerNameOverrides = { X: "", O: "" };
 
   const playerSubjects = { X: "", O: "" };
   const questionSets = new Map();
@@ -677,41 +664,11 @@ function setupGame() {
   }
 
   function playerLabel(player) {
-    const customName = playerNameOverrides[player]?.trim();
-    if (customName) {
-      return customName;
-    }
-
     if (isBotPlayer(player)) {
       return lang().botName;
     }
 
     return lang().player(player);
-  }
-
-  function syncInputValue(input, value) {
-    if (!input) {
-      return;
-    }
-
-    if (document.activeElement !== input) {
-      input.value = value;
-    }
-  }
-
-  function normalizePlayerName(value) {
-    return value.replace(/\s+/g, " ").trim().slice(0, 18);
-  }
-
-  function updatePlayerName(player, nextValue) {
-    const normalizedValue = normalizePlayerName(nextValue);
-    const defaultName = isBotPlayer(player) ? lang().botName : lang().player(player);
-
-    playerNameOverrides[player] = normalizedValue && normalizedValue !== defaultName
-      ? normalizedValue
-      : "";
-
-    render();
   }
 
   function formatTileLabel(index) {
@@ -796,20 +753,6 @@ function setupGame() {
       button.disabled = !isBotMode();
     });
     languageLabel.textContent = strings.languageLabel;
-    if (playerXNameLabel) {
-      playerXNameLabel.textContent = strings.playerXNameLabel;
-    }
-    if (playerONameLabel) {
-      playerONameLabel.textContent = isBotMode() ? strings.botNameLabel : strings.playerONameLabel;
-    }
-    if (playerXNameInput) {
-      playerXNameInput.placeholder = strings.namePlaceholder;
-    }
-    if (playerONameInput) {
-      playerONameInput.placeholder = strings.namePlaceholder;
-    }
-    syncInputValue(playerXNameInput, playerLabel("X"));
-    syncInputValue(playerONameInput, playerLabel("O"));
     setupTitle.textContent = strings.setupTitle;
     setupHint.textContent = strings.setupHint;
     subtitleText.textContent = strings.subtitle;
@@ -1439,26 +1382,6 @@ function setupGame() {
     currentLanguage = event.target.value === "ar" ? "ar" : "en";
     render();
   });
-
-  if (playerXNameInput) {
-    playerXNameInput.addEventListener("input", (event) => {
-      updatePlayerName("X", event.target.value);
-    });
-
-    playerXNameInput.addEventListener("blur", () => {
-      render();
-    });
-  }
-
-  if (playerONameInput) {
-    playerONameInput.addEventListener("input", (event) => {
-      updatePlayerName("O", event.target.value);
-    });
-
-    playerONameInput.addEventListener("blur", () => {
-      render();
-    });
-  }
 
   modeSelect.addEventListener("change", (event) => {
     gameMode = event.target.value === "bot" ? "bot" : "human";
